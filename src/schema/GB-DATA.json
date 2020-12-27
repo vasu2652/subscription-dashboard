@@ -1,0 +1,28 @@
+
+  {
+    "_id": "b8a0378f-5df7-4e7e-98f1-6a0195f9ee72",
+    "created_at": "2020-09-25T12:47:06",
+    "updated_at": "2020-09-25T12:47:06",
+    "deleted_at": "",
+    "version": 1,
+    "banner": "https://assets.apollo247.com/images/circle/banners/circle.jpg",
+    "is_active": true,
+    "cta_action": {
+      "meta": { "action": "MEMBERSHIP_DETAIL_CIRCLE" },
+      "type": "REDIRECT"
+    },
+    "banner_template_info": {
+      "headerText1": "<circle> MEMBERS SAVE BIG!",
+      "headerText2": "YOU COULD SAVE",
+      "headerText3": "₹848 TOO",
+      "visibilityFilters": ["NoCircleTransactionsExist"]
+    },
+    "meta": "",
+    "end_date": "",
+    "group_id": "4de1d3ab-e996-4a6a-94a9-60a91614909b",
+    "banner_context": "HOME",
+    "priority": 2,
+    "visible_duration": 2,
+    "banner_visibility_mode": "subscribed",
+    "start_date": "2020-09-25T07:17:06+00:00"
+  }

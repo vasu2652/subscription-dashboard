@@ -1,0 +1,21 @@
+{
+    "type": "HorizontalLayout",
+    "elements": [
+        {
+            "type": "Control",
+            "scope": "#/properties/name"
+        },
+        {
+            "type": "Control",
+            "scope": "#/properties/is_active"
+        },
+        {
+            "type": "Control",
+            "scope": "#/properties/start_date"
+        },
+        {
+            "type": "Control",
+            "scope": "#/properties/end_date"
+        }
+    ]
+}

@@ -1,0 +1,88 @@
+{
+    "type": "object",
+    "properties": {
+        "attribute": {
+            "type": "string"
+        },
+        "header_content": {
+            "type": "string"
+        },
+        "description": {
+            "type": "string"
+        },
+        "cta_label": {
+            "type": "string"
+        },
+        "cta_action": {
+            "type": "object",
+            "properties": {
+                "meta": {
+                    "type": "object",
+                    "properties": {
+                        "action": {
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": true,
+                    "required": [
+                        "action"
+                    ]
+                },
+                "type": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "required": [
+                "meta",
+                "type"
+            ]
+        },
+        "attribute_type": {
+            "type": "string"
+        },
+        "available_count": {
+            "type": "integer"
+        },
+        "refresh_frequency": {
+            "type": "integer"
+        },
+        "coupon": {
+            "type": "string"
+        },
+        "icon": {
+            "type": "string"
+        },
+        "group_plan_id": {
+            "type": "string"
+        },
+        "attribute_category": {
+            "type": "string",
+            "enum":[
+                "generic",
+                "pharmacy",
+                "diagnostic",
+                "consult"
+            ]
+        },
+        "priority": {
+            "type": "integer"
+        }
+    },
+    "additionalProperties": true,
+    "required": [
+        "attribute",
+        "header_content",
+        "description",
+        "cta_label",
+        "cta_action",
+        "attribute_type",
+        "available_count",
+        "refresh_frequency",
+        "coupon",
+        "icon",
+        "group_plan_id",
+        "attribute_category",
+        "priority"
+    ]
+}

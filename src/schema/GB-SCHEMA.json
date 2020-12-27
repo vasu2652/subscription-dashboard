@@ -1,0 +1,96 @@
+{
+  "type": "object",
+  "properties": {
+    "banner": { "type": "string" },
+    "is_active": { "type": "boolean" },
+    "cta_action": {
+      "type": "object",
+      "description":"Action Performed on CLICK",
+      "properties": {
+        "type": { "type": "string", "enum":["Redirect","POP-UP","WEB-VIEW"] },
+        "meta": {
+          "type": "array",
+          "items":{
+            "$ref":"#/definitions/meta"
+          }
+        }
+      },
+      "additionalProperties": true,
+      "required": ["meta", "type"]
+    },
+    "banner_template_info": {
+      "type": "object",
+      "properties": {
+        "content":{
+          "type":"array",
+          "items":{
+            "$ref":"#/definitions/content"
+          }
+        },
+        "visibilityFilters": {
+          "type": "array",
+          "items": { "type": "string","enum": [
+            "OneClickHC",
+            "NotOneClickHC",
+            "CircleTransactionsExist",
+            "NoCircleTransactionsExist",
+            "NoPharmaTransactionsExist",
+            "NoDiagnosticTransactionsExist",
+            "PharmaTransactionsExist",
+            "DiagnosticTransactionsExist"
+          ] }
+          
+        }
+      },
+      "additionalProperties": true,
+      "required": ["visibilityFilters"]
+    },
+    "meta": { "type": "string" },
+    "end_date": { "type": "string", "format": "date-time" },
+    "group_id": { "type": "string" },
+    "banner_context": { "type": "string" },
+    "priority": { "type": "integer" },
+    "visible_duration": { "type": "integer" },
+    "banner_visibility_mode": { "type": "string" },
+    "start_date": { "type": "string", "format": "date-time" }
+  },
+  "definitions":{
+    "content": {
+      "type": "object",
+      "required": [ "component", "displayValue" ],
+      "properties": {
+        "component": {
+          "type": "string"
+        },
+        "displayValue": {
+          "type": "string"
+        }
+      }
+    },
+    "meta":{
+      "type":"object",
+      "required": [ "attribute", "value" ],
+      "properties": {
+        "attribute": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "additionalProperties": true,
+  "required": [
+    "banner",
+    "is_active",
+    "cta_action",
+    "end_date",
+    "group_id",
+    "banner_context",
+    "priority",
+    "visible_duration",
+    "banner_visibility_mode",
+    "start_date"
+  ]
+}

@@ -1,0 +1,88 @@
+{
+    "type": "Categorization",
+    "elements": [
+        {
+            "type":"Category",
+            "label":"Basic Info",
+            "elements":[
+                {
+                    "type":"VerticalLayout",
+                    "elements":[
+                        {
+                            "type":"HorizontalLayout",
+                            "elements":[
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/name"
+                                },
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/plan_id"
+                                },
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/plan_selling_type"
+                                }
+                            ]
+                        },
+                        {
+                            "type":"HorizontalLayout",
+                            "elements":[
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/activation_modes"
+                                },
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/one_apollo_mapping"
+                                },
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/status"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type":"Category",
+            "label":"Summary",
+            "elements":[
+                {
+                    "type": "Control",
+                    "scope": "#/properties/plan_summary"
+                }
+            ]
+        },
+        {
+            "type":"Category",
+            "label":"Meta",
+            "elements":[
+                {
+                    "type": "Control",
+                    "scope": "#/properties/group_id"
+                },
+                
+                {
+                    "type": "Control",
+                    "scope": "#/properties/sub_plan_ids"
+                },
+                
+                {
+                    "type": "Control",
+                    "scope": "#/properties/start_date"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/end_date"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/coupons"
+                }
+            ]
+        }
+    ]
+}

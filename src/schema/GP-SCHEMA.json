@@ -1,0 +1,116 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string"
+        },
+        "plan_id": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string"
+        },
+        "group_id": {
+            "type": "string"
+        },
+        "one_apollo_mapping": {
+            "type": "string"
+        },
+        "plan_selling_type": {
+            "type": "string",
+            "enum": [
+                "single",
+                "multiple"
+            ]
+        },
+        "sub_plan_ids": {
+            "type": "string"
+        },
+        "activation_modes": {
+            "$ref":"#/definitions/activation_modes"
+        },
+        "start_date": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "end_date": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "coupons": {
+            "type": "string"
+        },
+        "plan_summary": {
+            "type": "object",
+            "properties": {
+                "sub_plans": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/sub_plans"
+                    }
+                },
+                "icon_base_url": {
+                    "type": "string"
+                }
+            },
+            "additionalProperties": true,
+            "required": [
+                "icon_base_url"
+            ]
+        }
+    },
+    "additionalProperties": true,
+    "required": [
+        "name",
+        "plan_id",
+        "status",
+        "group_id",
+        "one_apollo_mapping",
+        "plan_selling_type",
+        "sub_plan_ids",
+        "activation_modes",
+        "start_date",
+        "end_date",
+        "coupons"
+    ],
+    "definitions": {
+        "sub_plans": {
+            "type": "object",
+            "properties": {
+                "plan_details": {
+                    "type": "object",
+                    "properties": {
+                        "price": {
+                            "type": "integer"
+                        },
+                        "renew_mode": {
+                            "$ref":"#/definitions/activation_modes"
+                        },
+                        "benefits_worth": {
+                            "type": "string"
+                        },
+                        "valid_duration": {
+                            "type": "integer"
+                        },
+                        "available_for_trial": {
+                            "type": "boolean"
+                        },
+                        "special_price_enabled": {
+                            "type": "boolean"
+                        },
+                        "saved_extra_on_lower_plan": {
+                            "type": "string"
+                        }
+                    },
+                    "additionalProperties": true
+                }
+            }
+        },
+        "activation_modes":{
+            "type": "array",
+            "items": {
+                "enum":["deferred_transaction","via_upgrade","via_purchase","default_active"],
+                "type": "string"
+            }}
+    }
+}

@@ -1,0 +1,60 @@
+    {
+        "_id": "f224b0f3-2814-420c-8023-dc68ba3042f3",
+        "created_at": "2020-10-21T10:19:06.06425",
+        "updated_at": "2020-10-21T10:19:06.06425",
+        "deleted_at": null,
+        "version": 1,
+        "name": "CIRCLE PLAN",
+        "plan_id": "CIRCLEPlan",
+        "status": "active",
+        "group_id": "4de1d3ab-e996-4a6a-94a9-60a91614909b",
+        "one_apollo_mapping": "",
+        "plan_selling_type": "multiple",
+        "sub_plan_ids": "Circle_HalfYearly,Circle_Monthly,Circle_Anually",
+        "activation_modes": [
+            "via_purchase"
+        ],
+        "start_date": "2020-10-16T18:41:15+00:00",
+        "end_date": null,
+        "coupons": null,
+        "plan_summary": {
+            "plans": {
+                "Circle_Anually": {
+                    "price": 349,
+                    "renew_mode": [
+                        "DEFERRED_TRANSACTION",
+                        "PAYMENT"
+                    ],
+                    "benefits_worth": "100k",
+                    "valid_duration": 360,
+                    "available_for_trial": false,
+                    "special_price_enabled": true,
+                    "saved_extra_on_lower_plan": "14%"
+                },
+                "Circle_Monthly": {
+                    "price": 49,
+                    "renew_mode": [
+                        "DEFERRED_TRANSACTION",
+                        "PAYMENT"
+                    ],
+                    "default_pack": true,
+                    "starter_pack": true,
+                    "benefits_worth": "10k",
+                    "valid_duration": 60,
+                    "available_for_trial": true,
+                    "special_price_enabled": true
+                },
+                "Circle_HalfYearly": {
+                    "price": 249,
+                    "renew_mode": [
+                        "DEFERRED_TRANSACTION",
+                        "PAYMENT"
+                    ],
+                    "benefits_worth": "10k",
+                    "valid_duration": 180,
+                    "special_price_enabled": true
+                }
+            },
+            "icon_base_url": "https://assets.apollo247.com/images/"
+        }
+    }
