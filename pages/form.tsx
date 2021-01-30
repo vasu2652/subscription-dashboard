@@ -10,7 +10,6 @@ export default function Form() {
         <Typography variant="h4" component="h1" gutterBottom>
           Dashboard ={'>'} Next.js + Material-UI
         </Typography>
-        
       </Box>
     </Container>
   );

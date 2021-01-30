@@ -13,6 +13,7 @@ export const queries: { [key: string]: string } = {
           code
           message
           response {
+            _id
             name
             start_date
             end_date
@@ -25,13 +26,20 @@ export const queries: { [key: string]: string } = {
           code
           message
           response {
+            _id
             name
             plan_id
             plan_selling_type
             one_apollo_mapping
             activation_modes
             plan_summary
-            
+            status
+            start_date
+            end_date
+            group{
+              _id
+              name
+            }
           }
         }
       }`,
@@ -40,13 +48,22 @@ export const queries: { [key: string]: string } = {
           code
           message
           response {
+            _id
             banner
             is_active
-            cta_action
+            cta_action_formated
             meta
             banner_context
-            banner_template_info
+            banner_template_info_formated
             banner_visibility_mode
+            visible_duration
+            priority
+            start_date
+            end_date
+            meta
+            group{
+              _id
+            }
           }
         }
       }`,
@@ -55,6 +72,7 @@ export const queries: { [key: string]: string } = {
           code
           success
           response{
+            _id
             attribute
             attribute_category
             attribute_type
@@ -64,9 +82,10 @@ export const queries: { [key: string]: string } = {
             cta_action
             available_count
             refresh_frequency
+            icon
           }
         }
-      }`,
+      }`
 };
 export const mappings: { [key: string]: any } = {
   group: {
@@ -88,8 +107,8 @@ export const mappings: { [key: string]: any } = {
       "banner_context",
       "banner_visibility_mode",
       "is_active",
-      "cta_action",
-      "banner_template_info",
+      "cta_action_formated",
+      "banner_template_info_formated",
     ],
     uischema:banners_uischema,
     schema:banners_schema

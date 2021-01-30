@@ -1,63 +1,123 @@
 {
   "type": "object",
   "properties": {
-    "banner": { "type": "string" },
-    "is_active": { "type": "boolean" },
-    "cta_action": {
+    "banner": {
+      "type": "string"
+    },
+    "is_active": {
+      "type": "boolean"
+    },
+    "cta_action_formated": {
       "type": "object",
-      "description":"Action Performed on CLICK",
+      "description": "Action Performed on CLICK",
       "properties": {
-        "type": { "type": "string", "enum":["Redirect","POP-UP","WEB-VIEW"] },
+        "type": {
+          "type": "string",
+          "enum": [
+            "REDIRECT",
+            "POP-UP",
+            "WEB-VIEW",
+            "ONE-TOUCH"
+          ]
+        },
         "meta": {
           "type": "array",
-          "items":{
-            "$ref":"#/definitions/meta"
+          "items": {
+            "$ref": "#/definitions/meta"
           }
         }
       },
       "additionalProperties": true,
-      "required": ["meta", "type"]
+      "required": [
+        "meta",
+        "type"
+      ]
     },
-    "banner_template_info": {
+    "banner_template_info_formated": {
       "type": "object",
       "properties": {
-        "content":{
-          "type":"array",
-          "items":{
-            "$ref":"#/definitions/content"
+        "content": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/content"
+          }
+        },
+        "additional_info": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "GetUserHealthCredits",
+              "GetUserSavings",
+              "GetPharmaSavings",
+              "GetDiagnosticSavings",
+              "GetDeliverySavings",
+              "GetConsultSavings"
+            ]
+          }
+        },
+        "additional_info_meta":{
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/content"
           }
         },
         "visibilityFilters": {
           "type": "array",
-          "items": { "type": "string","enum": [
-            "OneClickHC",
-            "NotOneClickHC",
-            "CircleTransactionsExist",
-            "NoCircleTransactionsExist",
-            "NoPharmaTransactionsExist",
-            "NoDiagnosticTransactionsExist",
-            "PharmaTransactionsExist",
-            "DiagnosticTransactionsExist"
-          ] }
-          
+          "items": {
+            "type": "string",
+            "enum": [
+              "OneClickHC",
+              "NotOneClickHC",
+              "CircleTransactionsExist",
+              "NoCircleTransactionsExist",
+              "NoPharmaTransactionsExist",
+              "NoDiagnosticTransactionsExist",
+              "PharmaTransactionsExist",
+              "DiagnosticTransactionsExist"
+            ]
+          }
         }
       },
       "additionalProperties": true,
-      "required": ["visibilityFilters"]
+      "required": [
+        "visibilityFilters"
+      ]
     },
-    "meta": { "type": "string" },
-    "end_date": { "type": "string", "format": "date-time" },
-    "group_id": { "type": "string" },
-    "banner_context": { "type": "string" },
-    "priority": { "type": "integer" },
-    "visible_duration": { "type": "integer" },
-    "banner_visibility_mode": { "type": "string" },
-    "start_date": { "type": "string", "format": "date-time" }
+    "meta": {
+      "type": "string"
+    },
+    "end_date": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "group_id": {
+      "type": "string"
+    },
+    "banner_context": {
+      "type": "string"
+    },
+    "priority": {
+      "type": "integer"
+    },
+    "visible_duration": {
+      "type": "integer"
+    },
+    "banner_visibility_mode": {
+      "type": "string"
+    },
+    "start_date": {
+      "type": "string",
+      "format": "date-time"
+    }
   },
-  "definitions":{
+  "definitions": {
     "content": {
       "type": "object",
-      "required": [ "component", "displayValue" ],
+      "required": [
+        "component",
+        "displayValue"
+      ],
       "properties": {
         "component": {
           "type": "string"
@@ -67,9 +127,12 @@
         }
       }
     },
-    "meta":{
-      "type":"object",
-      "required": [ "attribute", "value" ],
+    "meta": {
+      "type": "object",
+      "required": [
+        "attribute",
+        "value"
+      ],
       "properties": {
         "attribute": {
           "type": "string"
@@ -85,12 +148,21 @@
     "banner",
     "is_active",
     "cta_action",
-    "end_date",
-    "group_id",
     "banner_context",
     "priority",
     "visible_duration",
     "banner_visibility_mode",
     "start_date"
-  ]
+  ],
+
+  "dynamic_data": {
+    "group_id": {
+        "type": "enum",
+        "meta": {
+            "entity": "group",
+            "params": "_id",
+            "path": "properties.group_id"
+        }
+    }
+}
 }

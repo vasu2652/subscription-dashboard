@@ -53,11 +53,11 @@
           "elements":[
               {
                   "type": "Control",
-                  "scope": "#/properties/cta_action"
+                  "scope": "#/properties/cta_action_formated"
               },
               {
                   "type": "Control",
-                  "scope": "#/properties/banner_template_info"
+                  "scope": "#/properties/banner_template_info_formated"
               }
           ]
       },
@@ -65,10 +65,7 @@
           "type":"Category",
           "label":"Meta",
           "elements":[
-              {
-                  "type": "Control",
-                  "scope": "#/properties/meta"
-              },
+              
               {
                   "type": "Control",
                   "scope": "#/properties/end_date"

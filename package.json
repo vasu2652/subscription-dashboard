@@ -15,6 +15,7 @@
     "@material-ui/icons": "^4.11.2",
     "@material-ui/pickers": "^3.2.10",
     "clsx": "latest",
+    "lodash": "^4.17.20",
     "next": "latest",
     "react": "^17.0.1",
     "react-dom": "latest",

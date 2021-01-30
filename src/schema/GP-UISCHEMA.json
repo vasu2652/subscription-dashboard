@@ -62,14 +62,8 @@
             "elements":[
                 {
                     "type": "Control",
-                    "scope": "#/properties/group_id"
+                    "scope": "#/properties/group"
                 },
-                
-                {
-                    "type": "Control",
-                    "scope": "#/properties/sub_plan_ids"
-                },
-                
                 {
                     "type": "Control",
                     "scope": "#/properties/start_date"

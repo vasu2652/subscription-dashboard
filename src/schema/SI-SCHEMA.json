@@ -21,6 +21,9 @@
                     "properties": {
                         "action": {
                             "type": "string"
+                        },
+                        "message":{
+                            "type":"string"
                         }
                     },
                     "additionalProperties": true,
@@ -32,11 +35,7 @@
                     "type": "string"
                 }
             },
-            "additionalProperties": true,
-            "required": [
-                "meta",
-                "type"
-            ]
+            "additionalProperties": true
         },
         "attribute_type": {
             "type": "string"
@@ -57,12 +56,12 @@
             "type": "string"
         },
         "attribute_category": {
-            "type": "string",
+            "type": ["string"],
             "enum":[
-                "generic",
-                "pharmacy",
-                "diagnostic",
-                "consult"
+                "GENERIC",
+                "PHARMACY",
+                "DIAGNOSTIC",
+                "CONSULT"
             ]
         },
         "priority": {
@@ -75,14 +74,20 @@
         "header_content",
         "description",
         "cta_label",
-        "cta_action",
         "attribute_type",
         "available_count",
         "refresh_frequency",
-        "coupon",
-        "icon",
-        "group_plan_id",
-        "attribute_category",
-        "priority"
-    ]
+        "group_plan_id"
+    ],
+
+    "dynamic_data": {
+        "group_plan_id": {
+            "type": "enum",
+            "meta": {
+                "entity": "group_plan",
+                "params": "_id",
+                "path": "properties.group_plan_id"
+            }
+        }
+    }
 }
