@@ -21,14 +21,13 @@ import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import LastPageIcon from '@material-ui/icons/LastPage';
 import AddIcon from '@material-ui/icons/Add';
 import AddNewEntity from '../../src/components/modal';
-import { fetchDetails } from '../../src/lib/util';
+import { fetchDetails, postForm } from '../../src/lib/util';
 import { Row,StyledTableCell } from '../../src/components/table/styled-row';
-
 const StyledBreadcrumb = withStyles((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.grey[100],
     height: theme.spacing(3),
-    color: theme.palette.grey[800],
+    color:"#02475b",
     fontSize: 20,
     fontWeight: theme.typography.fontWeightRegular,
     '&:hover, &:focus': {
@@ -118,7 +117,7 @@ const useStyles = makeStyles((theme) => ({
     //height:500
   },
   table: {
-
+    color:"#02475b"
   }
 }));
 export default function EntityTable() {
@@ -141,7 +140,7 @@ export default function EntityTable() {
     setModalOpen(false);
   };
 
-  const handleChangePage = (event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
+  const handleChangePage = (_event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
     setPage(newPage);
   };
 
@@ -163,6 +162,14 @@ export default function EntityTable() {
 
     }
   }, [entity])
+
+  enum ActionType{
+    EDIT = "EDIT",
+    ADD = "ADD"
+  }
+  const handleFormSubmit=(action:ActionType, data:any)=>()=>{
+    postForm(entity, data, action).then(i=>router.reload());
+  }
   return (
     <>
       <Breadcrumbs aria-label="breadcrumb">
@@ -173,7 +180,7 @@ export default function EntityTable() {
           icon={<HomeIcon fontSize="small" />}
           onClick={handleClick}
         />
-        <StyledBreadcrumb component="a" href="#" label={entity} onClick={handleClick} />
+        <StyledBreadcrumb component="a" href="#" label={entity} onClick={handleClick}  />
       </Breadcrumbs>
       <Grid container justify="flex-end">
         <TablePagination
@@ -190,7 +197,7 @@ export default function EntityTable() {
           onChangeRowsPerPage={handleChangeRowsPerPage}
           ActionsComponent={TablePaginationActions}
         />
-        <Fab color="primary" aria-label="add" style={{ margin: 5 }} onClick={handleModalOpen}>
+        <Fab  aria-label="add" style={{ margin: 5, backgroundColor:"#02475b", color:"white" }} onClick={handleModalOpen}>
           <AddIcon />
         </Fab>
       </Grid>
@@ -200,6 +207,7 @@ export default function EntityTable() {
         <Table aria-label="collapsible table" className={classes.table}>
           <TableHead>
             <TableRow>
+            <StyledTableCell align="center" key={0}>SNO</StyledTableCell>
               {
                 tableSchema.map((key, index) => <StyledTableCell align="center" key={index}>{key.toUpperCase()}</StyledTableCell>)
               }
@@ -211,7 +219,7 @@ export default function EntityTable() {
               ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : data
             ).map((entity: Object, index) => (
-              <Row key={index} row={{ ...entity, sno: index + 1 }} entitySchema={tableSchema} schema={schema} uischema={uischema} />
+              <Row key={index} row={entity} sno={index+1} entitySchema={tableSchema} schema={schema} uischema={uischema} handleFormSubmit={handleFormSubmit}/>
             ))}
           </TableBody>
         </Table>
@@ -220,7 +228,7 @@ export default function EntityTable() {
         <>
           <h2 id="transition-modal-title">New: {entity?.toUpperCase()}</h2>
           <FormComponent uischema={uischema} schema={schema} data={formdata} setFormdata={setFormdata} />
-          <Button color="primary" variant="contained" >Submit</Button>
+          <Button color="primary" variant="contained" onClick={handleFormSubmit(ActionType.ADD,formdata)}>Submit</Button>
         </>)} />
     </>
   );

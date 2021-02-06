@@ -2,11 +2,11 @@ import { mappings, queries } from "../constants";
 import * as _ from 'lodash';
 export const fetchDetails = async (entity:string) => {
     try {
-    const apiResponse = await fetch('https://aph-staging-api.apollo247.com/graphql', {
+    const apiResponse = await fetch('http://localhost:3000/graphql', {
         method: "POST",
         headers: {
           "AUTHORIZATION": "Bearer 3d1833da7020e0602165529446587434",
-          "mobilenumber": "+919010637524",
+          "mobilenumber": "+918919666249",
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
@@ -20,6 +20,25 @@ export const fetchDetails = async (entity:string) => {
         console.error(error);
         return Promise.reject(error);
     }
+}
+export const postForm = (entity:string, data:any, action:string)=>{
+  try {
+    return new Promise(async (resolve,reject)=>{
+      fetch(`http://localhost/dashboard/${entity}`, {
+        method: "POST",
+        headers: {
+          "AUTHORIZATION": "Bearer 3d1833da7020e0602165529446587434",
+          "mobilenumber": "+919010637524",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      }).then(res=>res.json()).then(resolve).catch(reject);
+    })
+
+  } catch (error) {
+      console.error(error);
+      return Promise.reject(error);
+  }
 }
 export const getStuffedSchema = (schema:any)=>{
     const { dynamic_data } = schema;

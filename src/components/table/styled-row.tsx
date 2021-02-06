@@ -12,8 +12,8 @@ import { withStyles, Theme } from '@material-ui/core/styles';
 export const StyledTableCell = withStyles((theme: Theme) =>
   createStyles({
     head: {
-      backgroundColor: "#272c34",
-      color: theme.palette.common.white,
+      backgroundColor: "#fcb716",
+      color: "#fff",
     },
     body: {
       fontSize: 14,
@@ -48,18 +48,19 @@ const useRowStyles = makeStyles({
     base0E: '#A36AC7',
     base0F: '#3971ED'
   };
-export const Row = (props: { row: any, entitySchema: string[], schema: Object, uischema: Object })=> {
-  const { row, entitySchema, schema, uischema } = props;
+export const Row = (props: { row: any, entitySchema: string[], schema: Object, uischema: Object, handleFormSubmit:any, sno:number })=> {
+  const { row, entitySchema, schema, uischema,handleFormSubmit, sno } = props;
   const [ formdata, setFormdata] = useState(row);
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
   return (
     <React.Fragment>
       <TableRow className={classes.root}>
+      <StyledTableCell align="center" key={0}>{sno}</StyledTableCell>
         {entitySchema.map((key, index) => {
           const data = row[key];
           if (typeof data === 'object') {
-            return <StyledTableCell align="center" key={index}> <JSONTree data={data} theme={{
+            return <StyledTableCell align="center" key={index+1}> <JSONTree data={data} theme={{
               extend: theme,
               // underline keys for literal values
               valueLabel: {
@@ -77,7 +78,7 @@ export const Row = (props: { row: any, entitySchema: string[], schema: Object, u
             }} shouldExpandNode={() => false} invertTheme={true} /> </StyledTableCell>
           }
           else {
-            return <StyledTableCell align="center" key={index}>{data?.toString().length > 0 ? data : "NULL"}</StyledTableCell>
+            return <StyledTableCell align="center" key={index+1}>{data?.toString().length > 0 ? typeof data ==="boolean"? data.toString():data : "NULL"}</StyledTableCell>
           }
         })}
         <StyledTableCell>
@@ -92,7 +93,7 @@ export const Row = (props: { row: any, entitySchema: string[], schema: Object, u
             <Box margin={0.5} display="flex" style={{ flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
               <FormComponent data={formdata} schema={schema} uischema={uischema} open={open} setFormdata={setFormdata}/>
               <CssBaseline />
-              <Button variant="contained" color="secondary" onClick={()=>console.log(formdata)}>submit</Button>
+              <Button variant="contained" color="secondary" onClick={handleFormSubmit("EDIT",formdata)}>submit</Button>
             </Box>
           </Collapse>
         </StyledTableCell>

@@ -86,7 +86,6 @@ const useStyles = makeStyles((theme: Theme) =>
 );
 
 export default function Header(props: any) {
-  console.log(props.drawerOpen,"*************")
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState<null | HTMLElement>(null);
@@ -170,7 +169,7 @@ export default function Header(props: any) {
 
   return (
     <div className={classes.grow}>
-      <AppBar position="static">
+      <AppBar position="static" style={{ background: 'white', color:"black" }}>
         <Toolbar>
           <IconButton
             edge="start"

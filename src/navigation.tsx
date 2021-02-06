@@ -28,12 +28,16 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
+      backgroundColor:"#fff",
+      color:"#02475b",
       transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
     },
     appBarShift: {
+      backgroundColor:"#fff",
+      color:"#02475b",
       marginLeft: drawerWidth,
       width: `calc(100% - ${drawerWidth}px)`,
       transition: theme.transitions.create(['width', 'margin'], {
@@ -119,8 +123,14 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
+          <div style={{width:150}}>
+            <a href="/">
+              <img src="https://assets.apollo247.com/images/ic_logo.png" title="Online Doctor Consultation &amp; Medicines" alt="Online Doctor Consultation &amp; Medicines" style={{width:70}}/>
+            </a>
+          </div>
+
           <Typography variant="h6" noWrap>
-            Admin Dashboard
+            Dashboard
           </Typography>
         </Toolbar>
       </AppBar>
@@ -146,7 +156,7 @@ export default function MiniDrawer() {
         <List>
           {['group', 'group_plan', 'benefits', 'banners'].map((text, index) => (
             <Link href ={text} color="inherit" key={index}>
-              <ListItem button key={text} href={text}>
+              <ListItem button key={text.toUpperCase()} href={text}>
               <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
               <ListItemText primary={text} />
             </ListItem>

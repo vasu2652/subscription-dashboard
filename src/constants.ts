@@ -36,6 +36,7 @@ export const queries: { [key: string]: string } = {
             status
             start_date
             end_date
+            coupons
             group{
               _id
               name
@@ -90,20 +91,19 @@ export const queries: { [key: string]: string } = {
 export const mappings: { [key: string]: any } = {
   group: {
     response: "GetAllGroup",
-    headers: ["sno","name", "start_date", "end_date", "is_active"],
+    headers: ["name", "start_date", "end_date", "is_active"],
     uischema:group_uischema,
     schema:group_schema
   },
   group_plan: {
     response: "GetAllGroupPlan",
-    headers: ["sno","name", "plan_id", "plan_selling_type", "one_apollo_mapping"],
+    headers: ["name", "plan_id", "plan_selling_type", "one_apollo_mapping"],
     uischema:group_plan_uischema,
     schema:group_plan_schema
   },
   banners: {
     response: "GetAllGroupBanners",
-    headers: ["sno",
-      "banner",
+    headers: ["banner",
       "banner_context",
       "banner_visibility_mode",
       "is_active",
@@ -115,7 +115,7 @@ export const mappings: { [key: string]: any } = {
   },
   benefits: {
     response: "GetAllSubscriptionInclusions",
-    headers: ["sno",
+    headers: [
       "attribute",
       "header_content",
       "description",
