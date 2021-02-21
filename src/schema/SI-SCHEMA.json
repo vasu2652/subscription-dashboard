@@ -49,9 +49,9 @@
         "attribute_type": {
             "type": "string",
             "enum":[
-                "unlimited",
-                "recurring",
-                "limited"
+                "UNLIMITED",
+                "RECURRING",
+                "LIMITED"
             ]
         },
         "available_count": {

@@ -19,8 +19,8 @@
         "plan_selling_type": {
             "type": "string",
             "enum": [
-                "single",
-                "multiple"
+                "SINGLE",
+                "MULTIPLE"
             ]
         },
         "activation_modes": {
@@ -95,11 +95,10 @@
             "type": "array",
             "items": {
                 "enum": [
-                    "deferred_transaction",
-                    "via_upgrade",
-                    "via_purchase",
-                    "default_active",
-                    "payment"
+                    "DEFERRED_TRANSACTION",
+                    "VIA_UPGRADE",
+                    "VIA_PURCHASE",
+                    "DEFAULT_ACTIVE"
                 ],
                 "type": "string"
             }
