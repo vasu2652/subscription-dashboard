@@ -37,6 +37,7 @@ export const queries: { [key: string]: string } = {
             start_date
             end_date
             coupons
+            group_id
             group{
               _id
               name
@@ -62,9 +63,7 @@ export const queries: { [key: string]: string } = {
             start_date
             end_date
             meta
-            group{
-              _id
-            }
+            group_id
           }
         }
       }`,
@@ -84,6 +83,7 @@ export const queries: { [key: string]: string } = {
             available_count
             refresh_frequency
             icon
+            group_plan_id
           }
         }
       }`
@@ -103,7 +103,7 @@ export const mappings: { [key: string]: any } = {
   },
   banners: {
     response: "GetAllGroupBanners",
-    headers: ["banner",
+    headers: [
       "banner_context",
       "banner_visibility_mode",
       "is_active",

@@ -10,13 +10,8 @@
         "status": {
             "type": "string"
         },
-        "group": {
-            "type": "object",
-            "properties":{
-                "name":{
-                    "type":"string"
-                }
-            }
+        "group_id": {
+            "type": "string"
         },
         "one_apollo_mapping": {
             "type": "string"
@@ -60,8 +55,7 @@
         "sub_plan_ids",
         "activation_modes",
         "start_date",
-        "end_date",
-        "coupons"
+        "end_date"
     ],
     "definitions": {
         "plan_summary": {

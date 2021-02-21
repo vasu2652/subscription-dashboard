@@ -62,7 +62,7 @@
             "elements":[
                 {
                     "type": "Control",
-                    "scope": "#/properties/group"
+                    "scope": "#/properties/group_id"
                 },
                 {
                     "type": "Control",

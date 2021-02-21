@@ -17,7 +17,9 @@
             "REDIRECT",
             "POP-UP",
             "WEB-VIEW",
-            "ONE-TOUCH"
+            "ONE-TOUCH",
+            "CALL_API",
+            "WEB_VIEW"
           ]
         },
         "meta": {
@@ -154,7 +156,6 @@
     "banner_visibility_mode",
     "start_date"
   ],
-
   "dynamic_data": {
     "group_id": {
         "type": "enum",

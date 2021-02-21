@@ -32,13 +32,27 @@
                     ]
                 },
                 "type": {
-                    "type": "string"
+                    "type": "string",
+                    "enum": [
+                        "REDIRECT",
+                        "POP-UP",
+                        "WEB-VIEW",
+                        "ONE-TOUCH",
+                        "CALL_API",
+                        "WEB_VIEW",
+                        "WHATSAPP_OPEN_CHAT"
+                      ]
                 }
             },
             "additionalProperties": true
         },
         "attribute_type": {
-            "type": "string"
+            "type": "string",
+            "enum":[
+                "unlimited",
+                "recurring",
+                "limited"
+            ]
         },
         "available_count": {
             "type": "integer"
@@ -58,10 +72,10 @@
         "attribute_category": {
             "type": ["string"],
             "enum":[
-                "GENERIC",
-                "PHARMACY",
-                "DIAGNOSTIC",
-                "CONSULT"
+                "Pharma",
+                "Consults",
+                "Diagnostics",
+                "Generic"
             ]
         },
         "priority": {
@@ -79,7 +93,6 @@
         "refresh_frequency",
         "group_plan_id"
     ],
-
     "dynamic_data": {
         "group_plan_id": {
             "type": "enum",

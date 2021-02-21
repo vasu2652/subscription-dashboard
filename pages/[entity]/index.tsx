@@ -23,6 +23,8 @@ import AddIcon from '@material-ui/icons/Add';
 import AddNewEntity from '../../src/components/modal';
 import { fetchDetails, postForm } from '../../src/lib/util';
 import { Row,StyledTableCell } from '../../src/components/table/styled-row';
+import LinearWithValueLabel from '../../src/components/linear-loader';
+import { TopSnackBar } from '../../src/components/snackbar';
 const StyledBreadcrumb = withStyles((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.grey[100],
@@ -127,17 +129,31 @@ export default function EntityTable() {
   const [data, setData] = useState([]);
   const [tableSchema, setTableSchema] = useState<string[]>([]);
   const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
+  const [rowsPerPage, setRowsPerPage] = React.useState(10);
   const [uischema, setUIschema] = useState({});
   const [schema, setSchema] = useState({});
   const [modalOpen, setModalOpen] = React.useState(false);
   const [formdata, setFormdata] = useState({});
+  const [reload , setReload] = useState(new Date());
+  const [progress, setProgress] = useState(0);
+  const [snack, setSnack]= useState({
+    severity: "success",
+    message: "",
+    open: false
+  })
   const handleModalOpen = () => {
     setModalOpen(true);
   };
 
   const handleModalClose = () => {
     setModalOpen(false);
+  };
+
+  const handleSnackClose = () => {
+    setSnack({
+      ...snack,
+      open: false
+    });
   };
 
   const handleChangePage = (_event: React.MouseEvent<HTMLButtonElement> | null, newPage: number) => {
@@ -153,22 +169,48 @@ export default function EntityTable() {
 
   useEffect(() => {
     if (entity !== undefined) {
+      setProgress(10);
       setTableSchema(mappings[entity].headers);
+      setProgress(40);
       fetchDetails(entity).then((response) => {
+        setProgress(50);
         setData(response);
+        setProgress(90)
         setSchema(mappings[entity]['schema']);
         setUIschema(mappings[entity]['uischema']);
+        setProgress(100);
+        setModalOpen(false);
+        setProgress(0);
       })
-
     }
-  }, [entity])
+  }, [entity, reload])
 
   enum ActionType{
     EDIT = "EDIT",
     ADD = "ADD"
   }
-  const handleFormSubmit=(action:ActionType, data:any)=>()=>{
-    postForm(entity, data, action).then(i=>router.reload());
+  const handleFormSubmit = (action: ActionType, data: any) => () => {
+    setProgress(10);
+    postForm(entity, data, action).then((data: any) => {
+      if (data.error) {
+        setSnack({
+          severity: "error",
+          open: true,
+          message: data.error
+        })
+      }
+      else {
+        setSnack({
+          severity: "success",
+          open: true,
+          message: "Records Updated"
+        })
+        setProgress(25);
+        setFormdata({});
+        setReload(new Date());
+      }
+
+    })
   }
   return (
     <>
@@ -182,11 +224,13 @@ export default function EntityTable() {
         />
         <StyledBreadcrumb component="a" href="#" label={entity} onClick={handleClick}  />
       </Breadcrumbs>
+      
+      <LinearWithValueLabel progress={progress}/>
       <Grid container justify="flex-end">
         <TablePagination
           rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
           colSpan={4}
-          count={data.length}
+          count={data?.length}
           rowsPerPage={rowsPerPage}
           page={page}
           SelectProps={{
@@ -201,7 +245,6 @@ export default function EntityTable() {
           <AddIcon />
         </Fab>
       </Grid>
-
       {/* <div className={classes.toolbar} /> */}
       <TableContainer component={Paper} className={classes.paper}>
         <Table aria-label="collapsible table" className={classes.table}>
@@ -216,10 +259,10 @@ export default function EntityTable() {
           </TableHead>
           <TableBody>
             {(rowsPerPage > 0
-              ? data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
+              ? data?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : data
-            ).map((entity: Object, index) => (
-              <Row key={index} row={entity} sno={index+1} entitySchema={tableSchema} schema={schema} uischema={uischema} handleFormSubmit={handleFormSubmit}/>
+            )?.map((entity: Object, index) => (
+              <Row key={entity._id} row={entity} sno={index+1} entitySchema={tableSchema} schema={schema} uischema={uischema} handleFormSubmit={handleFormSubmit}/>
             ))}
           </TableBody>
         </Table>
@@ -230,6 +273,7 @@ export default function EntityTable() {
           <FormComponent uischema={uischema} schema={schema} data={formdata} setFormdata={setFormdata} />
           <Button color="primary" variant="contained" onClick={handleFormSubmit(ActionType.ADD,formdata)}>Submit</Button>
         </>)} />
+        <TopSnackBar handleClose={handleSnackClose} {...snack}/>
     </>
   );
 }
