@@ -17,27 +17,33 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import { Link } from '@material-ui/core';
+import { Box, Button, Link, Menu, MenuItem } from '@material-ui/core';
+import { signIn, signOut, useSession } from 'next-auth/client'
+import { AccountCircle } from '@material-ui/icons';
+
 
 const drawerWidth = 240;
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
     root: {
-      display: 'flex',
+      flexGrow: 1
+    },
+    title:{
+      flexGrow: 1
     },
     appBar: {
       zIndex: theme.zIndex.drawer + 1,
-      backgroundColor:"#fff",
-      color:"#02475b",
+      backgroundColor: "#fff",
+      color: "#02475b",
       transition: theme.transitions.create(['width', 'margin'], {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.leavingScreen,
       }),
     },
     appBarShift: {
-      backgroundColor:"#fff",
-      color:"#02475b",
+      backgroundColor: "#fff",
+      color: "#02475b",
       marginLeft: drawerWidth,
       width: `calc(100% - ${drawerWidth}px)`,
       transition: theme.transitions.create(['width', 'margin'], {
@@ -46,7 +52,7 @@ const useStyles = makeStyles((theme: Theme) =>
       }),
     },
     menuButton: {
-      marginRight: 36,
+      marginRight: theme.spacing(2),
     },
     hide: {
       display: 'none',
@@ -76,16 +82,10 @@ const useStyles = makeStyles((theme: Theme) =>
     },
     toolbar: {
       display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'flex-end',
       padding: theme.spacing(0, 1),
       // necessary for content to be below app bar
       ...theme.mixins.toolbar,
-    },
-    content: {
-      flexGrow: 1,
-      padding: theme.spacing(3),
-    },
+    }
   }),
 );
 
@@ -93,7 +93,15 @@ export default function MiniDrawer() {
   const classes = useStyles();
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
-
+  const [session] = useSession();
+  const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const anchorOpen = Boolean(anchorEl);
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+  const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl(event.currentTarget);
+  };
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -101,7 +109,6 @@ export default function MiniDrawer() {
   const handleDrawerClose = () => {
     setOpen(false);
   };
-
   return (
     <div className={classes.root}>
       <CssBaseline />
@@ -123,15 +130,46 @@ export default function MiniDrawer() {
           >
             <MenuIcon />
           </IconButton>
-          <div style={{width:150}}>
+          <div style={{ width: 150 }}>
             <a href="/">
-              <img src="https://assets.apollo247.com/images/ic_logo.png" title="Online Doctor Consultation &amp; Medicines" alt="Online Doctor Consultation &amp; Medicines" style={{width:70}}/>
+              <img src="https://assets.apollo247.com/images/ic_logo.png" title="Online Doctor Consultation &amp; Medicines" alt="Online Doctor Consultation &amp; Medicines" style={{ width: 70 }} />
             </a>
           </div>
-
-          <Typography variant="h6" noWrap>
+          <Typography variant="h6" className={classes.title} noWrap>
             Dashboard
           </Typography>
+          {session ? (
+            <div >
+              <IconButton
+                aria-label="account of current user"
+                aria-controls="menu-appbar"
+                aria-haspopup="true"
+                onClick={handleMenu}
+                color="inherit"
+              >
+                <AccountCircle />
+              </IconButton>
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'right',
+                }}
+                open={anchorOpen}
+                onClose={handleClose}
+              >
+                <MenuItem onClick={handleClose}>My Account</MenuItem>
+                <MenuItem onClick={()=>signOut()}>Logout</MenuItem>
+              </Menu>
+            </div>
+          ):<Button color="inherit" >Login</Button>}
+
         </Toolbar>
       </AppBar>
       <Drawer
@@ -155,24 +193,15 @@ export default function MiniDrawer() {
         <Divider />
         <List>
           {['group', 'group_plan', 'benefits', 'banners'].map((text, index) => (
-            <Link href ={text} color="inherit" key={index}>
-              <ListItem button key={text.toUpperCase()} href={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
+            <Link href={`/data?entity=${text}`} color="inherit" key={index}>
+              <ListItem button key={text.toUpperCase()} href={`/data?entity=${text}`}>
+                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                <ListItemText primary={text} />
+              </ListItem>
             </Link>
           ))}
         </List>
-        {/* <Divider />
-        <List>
-          {['All mail', 'Trash', 'Spam'].map((text, index) => (
-            <ListItem button key={text}>
-              <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItem>
-          ))}
-        </List> */}
       </Drawer>
-      </div>
+    </div>
   );
 }

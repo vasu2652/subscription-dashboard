@@ -1,17 +1,12 @@
 import React from 'react';
 import clsx from 'clsx';
 import Container from '@material-ui/core/Container';
-import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import ProTip from '../src/ProTip';
-import Link from '../src/Link';
 import Copyright from '../src/Copyright';
 import Chart from '../src/components/charts';
 import Deposits from '../src/components/deposits';
 import Orders from '../src/components/orders';
 import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
 import Grid from '@material-ui/core/Grid';
 import { Paper } from '@material-ui/core';
 const useStyles = makeStyles((theme) => ({

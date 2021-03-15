@@ -24,7 +24,7 @@ export const fetchDetails = async (entity:string) => {
 export const postForm = (entity:string, data:any, action:string)=>{
   try {
     return new Promise(async (resolve,reject)=>{
-      fetch(`http://localhost/dashboard/${entity}`, {
+      fetch(`http://localhost:3000/dashboard/${entity}`, {
         method: "POST",
         headers: {
           "AUTHORIZATION": "Bearer 3d1833da7020e0602165529446587434",

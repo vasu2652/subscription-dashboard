@@ -7,6 +7,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import createCache from '@emotion/cache';
 import ResponsiveDrawer from '../src/navigation';
 import theme from '../src/theme';
+import { Provider, useSession, signIn } from 'next-auth/client';
 
 export const cache = createCache({ key: 'css', prepend: true });
 const useStyles = makeStyles((theme) => ({
@@ -25,6 +26,31 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(3),
   },
 }));
+
+function Unauthorized() {
+    return (
+        <div className="row">
+            <div className="col-lg-10 col-offset-1">
+
+                <p>Hey There, looks like you reached an area you don't have access to.</p>
+
+               <p> Please sign in here.</p>
+
+               <p> <button className="btn btn-secondary" onClick={()=>signIn()}>Login</button></p>
+            </div>
+        </div>
+    )
+}
+export const AuthHOC = (props: AppProps)=>{
+  const { Component, pageProps } = props;
+  const [session] = useSession();
+  if(session){
+    return <Component {...pageProps}/>
+  }
+  else{
+    return <Unauthorized/>
+  }
+} 
 export default function MyApp(props: AppProps) {
   const { Component, pageProps } = props;
   const classes = useStyles();
@@ -35,9 +61,9 @@ export default function MyApp(props: AppProps) {
       jssStyles.parentElement!.removeChild(jssStyles);
     }
   }, []);
-
   return (
-    <CacheProvider value={cache}>
+    <Provider session={pageProps.session}>
+      <CacheProvider value={cache}>
       <Head>
         <title>Apollo 24|7</title>
         <meta name="viewport" content="initial-scale=1, width=device-width" />
@@ -51,10 +77,12 @@ export default function MyApp(props: AppProps) {
         {/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
         <main className ={classes.content}>
         <div className={classes.toolbar} />
-          <Component {...pageProps} />
+          <AuthHOC Component={Component} {...pageProps}/>
         </main>
         
       </ThemeProvider>
     </CacheProvider>
-  );
+  
+    </Provider>
+    );
 }
