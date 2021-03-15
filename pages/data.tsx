@@ -261,8 +261,8 @@ export default function EntityTable() {
             {(rowsPerPage > 0
               ? data?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               : data
-            )?.map((entity: Object, index) => (
-              <Row key={entity._id} row={entity} sno={index+1} entitySchema={tableSchema} schema={schema} uischema={uischema} handleFormSubmit={handleFormSubmit}/>
+            )?.map((entity: any, index) => (
+              <Row key={entity?._id} row={entity} sno={index+1} entitySchema={tableSchema} schema={schema} uischema={uischema} handleFormSubmit={handleFormSubmit}/>
             ))}
           </TableBody>
         </Table>
