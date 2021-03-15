@@ -2,10 +2,10 @@ import { mappings, queries } from "../constants";
 import * as _ from 'lodash';
 export const fetchDetails = async (entity:string) => {
     try {
-    const apiResponse = await fetch('http://localhost:3000/graphql', {
+    const apiResponse = await fetch(`${process.env.APOLLO247_BASEURL!}/graphql`, {
         method: "POST",
         headers: {
-          "AUTHORIZATION": "Bearer 3d1833da7020e0602165529446587434",
+          "AUTHORIZATION": process.env.APOLLO247_TOKEN!,
           "mobilenumber": "+918919666249",
           "Content-Type": "application/json"
         },
@@ -24,10 +24,10 @@ export const fetchDetails = async (entity:string) => {
 export const postForm = (entity:string, data:any, action:string)=>{
   try {
     return new Promise(async (resolve,reject)=>{
-      fetch(`http://localhost:3000/dashboard/${entity}`, {
+      fetch(`${process.env.APOLLO247_BASEURL!}/api/dashboard/${entity}`, {
         method: "POST",
         headers: {
-          "AUTHORIZATION": "Bearer 3d1833da7020e0602165529446587434",
+          "AUTHORIZATION": process.env.APOLLO247_TOKEN!,
           "mobilenumber": "+919010637524",
           "Content-Type": "application/json"
         },
