@@ -2,7 +2,7 @@ import { mappings, queries } from "../constants";
 import * as _ from 'lodash';
 export const fetchDetails = async (entity:string) => {
     try {
-    const apiResponse = await fetch(`https://aph-staging-api.apollo247.com/graphql`, {
+    const apiResponse = await fetch(`https://aph-staging-api.apollo247.com`, {
         method: "POST",
         headers: {
           "AUTHORIZATION": process.env.APOLLO247_TOKEN!,
