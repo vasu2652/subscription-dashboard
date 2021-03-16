@@ -2,7 +2,7 @@ import { mappings, queries } from "../constants";
 import * as _ from 'lodash';
 export const fetchDetails = async (entity:string) => {
     try {
-    const apiResponse = await fetch(`${process.env.APOLLO247_BASEURL!}/graphql`, {
+    const apiResponse = await fetch(`https://aph-staging-api.apollo247.com/graphql`, {
         method: "POST",
         headers: {
           "AUTHORIZATION": process.env.APOLLO247_TOKEN!,
@@ -24,7 +24,7 @@ export const fetchDetails = async (entity:string) => {
 export const postForm = (entity:string, data:any, action:string)=>{
   try {
     return new Promise(async (resolve,reject)=>{
-      fetch(`${process.env.APOLLO247_BASEURL!}/api/dashboard/${entity}`, {
+      fetch(`https://aph-staging-api.apollo247.com/api/dashboard/${entity}`, {
         method: "POST",
         headers: {
           "AUTHORIZATION": process.env.APOLLO247_TOKEN!,
