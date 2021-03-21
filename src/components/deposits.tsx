@@ -2,7 +2,7 @@ import React from 'react';
 import Link from '@material-ui/core/Link';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-function Title(props) {
+function Title(props: { children: React.ReactNode; }) {
   return (
     <Typography component="h2" variant="h6" color="primary" gutterBottom>
       {props.children}
@@ -11,7 +11,7 @@ function Title(props) {
 }
 
 
-function preventDefault(event) {
+function preventDefault(event: { preventDefault: () => void; }) {
   event.preventDefault();
 }
 
@@ -21,7 +21,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Deposits(props) {
+export default function Deposits(props: { title: any; subs: any; }) {
   const { title, subs} = props;
   const classes = useStyles();
   return (

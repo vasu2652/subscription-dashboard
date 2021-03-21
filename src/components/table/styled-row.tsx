@@ -8,8 +8,8 @@ import Collapse from '@material-ui/core/Collapse';
 import TableCell from '@material-ui/core/TableCell';
 import { createStyles, IconButton, makeStyles, TableRow, CssBaseline, Button } from '@material-ui/core';
 import { FormComponent } from '../form';
-import { withStyles, Theme } from '@material-ui/core/styles';
-export const StyledTableCell = withStyles((theme: Theme) =>
+import { withStyles } from '@material-ui/core/styles';
+export const StyledTableCell = withStyles(() =>
   createStyles({
     head: {
       backgroundColor: "#fcb716",

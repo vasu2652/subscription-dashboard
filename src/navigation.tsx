@@ -17,8 +17,8 @@ import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
-import { Box, Button, Link, Menu, MenuItem } from '@material-ui/core';
-import { signIn, signOut, useSession } from 'next-auth/client'
+import { Button, Link, Menu, MenuItem } from '@material-ui/core';
+import { signOut, useSession } from 'next-auth/client'
 import { AccountCircle } from '@material-ui/icons';
 
 

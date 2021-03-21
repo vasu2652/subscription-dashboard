@@ -2,7 +2,7 @@ import React from 'react';
 import { useTheme } from '@material-ui/core/styles';
 import { LineChart, Line, XAxis, YAxis, Label, ResponsiveContainer } from 'recharts';
 import Typography from '@material-ui/core/Typography';
-function Title(props) {
+function Title(props: { children: React.ReactNode; }) {
   return (
     <Typography component="h2" variant="h6" color="primary" gutterBottom>
       {props.children}
@@ -11,7 +11,7 @@ function Title(props) {
 }
 
 // Generate Sales Data
-function createData(time, amount) {
+function createData(time: string, amount: number | undefined) {
   return { time, amount };
 }
 
@@ -46,7 +46,7 @@ export default function Chart() {
           <XAxis dataKey="time" stroke={theme.palette.text.secondary} />
           <YAxis stroke={theme.palette.text.secondary}>
             <Label
-              angle={270}
+              //angle={270}
               position="left"
               style={{ textAnchor: 'middle', fill: theme.palette.text.primary }}
             >

@@ -184,14 +184,9 @@ export default function EntityTable() {
       })
     }
   }, [entity, reload])
-
-  enum ActionType{
-    EDIT = "EDIT",
-    ADD = "ADD"
-  }
-  const handleFormSubmit = (action: ActionType, data: any) => () => {
+  const handleFormSubmit = (data: any) => () => {
     setProgress(10);
-    postForm(entity, data, action).then((data: any) => {
+    postForm(entity, data).then((data: any) => {
       if (data.error) {
         setSnack({
           severity: "error",
@@ -271,7 +266,7 @@ export default function EntityTable() {
         <>
           <h2 id="transition-modal-title">New: {entity?.toUpperCase()}</h2>
           <FormComponent uischema={uischema} schema={schema} data={formdata} setFormdata={setFormdata} />
-          <Button color="primary" variant="contained" onClick={handleFormSubmit(ActionType.ADD,formdata)}>Submit</Button>
+          <Button color="primary" variant="contained" onClick={handleFormSubmit(formdata)}>Submit</Button>
         </>)} />
         <TopSnackBar handleClose={handleSnackClose} {...snack}/>
     </>

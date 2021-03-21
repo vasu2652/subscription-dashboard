@@ -7,7 +7,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Typography from '@material-ui/core/Typography';
-function Title(props) {
+function Title(props: { children: React.ReactNode; }) {
   return (
     <Typography component="h2" variant="h6" color="primary" gutterBottom>
       {props.children}
@@ -16,7 +16,7 @@ function Title(props) {
 }
 
 // Generate Order Data
-function createData(id, date, name, shipTo, paymentMethod, amount) {
+function createData(id: number, date: string, name: string, shipTo: string, paymentMethod: string, amount: number) {
   return { id, date, name, shipTo, paymentMethod, amount };
 }
 
@@ -28,7 +28,7 @@ const rows = [
   createData(4, '15 Mar, 2019', 'Pankaj Goel', 'Hyderabad, TS', 'VISA ⠀•••• 5919', 212.79),
 ];
 
-function preventDefault(event) {
+function preventDefault(event: { preventDefault: () => void; }) {
   event.preventDefault();
 }
 

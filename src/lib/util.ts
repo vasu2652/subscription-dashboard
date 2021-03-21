@@ -21,7 +21,7 @@ export const fetchDetails = async (entity:string) => {
         return Promise.reject(error);
     }
 }
-export const postForm = (entity:string, data:any, action:string)=>{
+export const postForm = (entity:string, data:any)=>{
   try {
     return new Promise(async (resolve,reject)=>{
       fetch(`https://aph-staging-api.apollo247.com/api/dashboard/${entity}`, {
