@@ -5,7 +5,7 @@ export const fetchDetails = async (entity:string) => {
     const apiResponse = await fetch(`https://aph-staging-api.apollo247.com`, {
         method: "POST",
         headers: {
-          "AUTHORIZATION": process.env.APOLLO247_TOKEN!,
+          "AUTHORIZATION": 'Bearer 3d1833da7020e0602165529446587434',
           "mobilenumber": "+918919666249",
           "Content-Type": "application/json"
         },
@@ -27,7 +27,7 @@ export const postForm = (entity:string, data:any, action:string)=>{
       fetch(`https://aph-staging-api.apollo247.com/api/dashboard/${entity}`, {
         method: "POST",
         headers: {
-          "AUTHORIZATION": process.env.APOLLO247_TOKEN!,
+          "AUTHORIZATION": 'Bearer 3d1833da7020e0602165529446587434',
           "mobilenumber": "+919010637524",
           "Content-Type": "application/json"
         },
