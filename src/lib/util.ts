@@ -8,7 +8,7 @@ export const fetchDetails = async (entity:string, pageNumber:number, rowsPerPage
         return pattern?{ skip, take, pattern }: { skip, take }
       }
       
-    const apiResponse = await fetch(`http://localhost:3000/graphql`, {
+    const apiResponse = await fetch(`https://aph-staging-api.apollo247.com/graphql`, {
         method: "POST",
         headers: {
           "AUTHORIZATION": 'Bearer 3d1833da7020e0602165529446587434',
