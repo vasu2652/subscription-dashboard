@@ -48,8 +48,8 @@ const useRowStyles = makeStyles({
     base0E: '#A36AC7',
     base0F: '#3971ED'
   };
-export const Row = (props: { row: any, entitySchema: string[], schema: Object, uischema: Object, handleFormSubmit:any, sno:number })=> {
-  const { row, entitySchema, schema, uischema,handleFormSubmit, sno } = props;
+export const Row = (props: { row: any, entitySchema: string[], schema: Object, uischema: Object, handleFormSubmit:any, sno:number, page:number, rowsPerPage:number })=> {
+  const { row, entitySchema, schema, uischema,handleFormSubmit, sno, page, rowsPerPage } = props;
   const [ formdata, setFormdata] = useState(row);
   const [open, setOpen] = React.useState(false);
   const classes = useRowStyles();
@@ -91,7 +91,7 @@ export const Row = (props: { row: any, entitySchema: string[], schema: Object, u
         <StyledTableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={12}>
           <Collapse in={open} timeout="auto" unmountOnExit>
             <Box margin={0.5} display="flex" style={{ flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
-              <FormComponent data={formdata} schema={schema} uischema={uischema} open={open} setFormdata={setFormdata}/>
+              <FormComponent data={formdata} schema={schema} uischema={uischema} open={open} setFormdata={setFormdata} page={page} rowsPerPage={rowsPerPage}/>
               <CssBaseline />
               <Button variant="contained" color="secondary" onClick={handleFormSubmit("EDIT",formdata)}>submit</Button>
             </Box>

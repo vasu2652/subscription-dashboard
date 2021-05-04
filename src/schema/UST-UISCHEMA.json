@@ -1,0 +1,97 @@
+{
+    "type": "Categorization",
+    "elements": [
+        {
+            "type": "Category",
+            "label": "Basic Info",
+            "elements": [
+                {
+                    "type": "VerticalLayout",
+                    "elements": [
+                        {
+                            "type": "HorizontalLayout",
+                            "elements": [
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/mobile_number"
+                                },
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/amount"
+                                },
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/source_transaction_indentifier"
+                                },
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/transaction_type"
+                                },
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/order_id"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Category",
+            "label": "Configuration",
+            "elements": [
+                {
+                    "type": "Control",
+                    "scope": "#/properties/_id"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/created_at"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/updated_at"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/deleted_at"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/version"
+                }
+            ]
+        },
+        {
+            "type": "Category",
+            "label": "Meta",
+            "elements": [
+                {
+                    "type": "Control",
+                    "scope": "#/properties/coupon_availed"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/user_subscription_id"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/subscription_inclusion_id"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/transaction_date"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/meta"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/payment_reference"
+                }
+            ]
+        }
+    ]
+}

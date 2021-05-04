@@ -192,7 +192,7 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          {['group', 'group_plan', 'benefits', 'banners'].map((text, index) => (
+          {['group', 'group_plan', 'benefits', 'banners', 'subscriptions', 'transactions'].map((text, index) => (
             <Link href={`/data?entity=${text}`} color="inherit" key={index}>
               <ListItem button key={text.toUpperCase()} href={`/data?entity=${text}`}>
                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>

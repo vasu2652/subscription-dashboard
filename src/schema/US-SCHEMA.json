@@ -1,0 +1,131 @@
+{
+    "type": "object",
+    "properties": {
+        "_id": {
+            "type": "string"
+        },
+        "created_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "updated_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "deleted_at": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "version": {
+            "type": "integer"
+        },
+        "coupon_availed": {
+            "type": "string"
+        },
+        "mobile_number": {
+            "type": "string"
+        },
+        "order_id": {
+            "type": "string"
+        },
+        "status": {
+            "type": "string"
+        },
+        "start_date": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "end_date": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "deactivation_date": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "group_plan_id": {
+            "type": "string"
+        },
+        "plan_id": {
+            "type": "string"
+        },
+        "transaction_date_time": {
+            "type": "string",
+            "format": "date-time"
+        },
+        "payment_reference": {
+            "type": "object",
+            "properties": {
+                "amount_paid": {
+                    "type": "integer"
+                },
+                "payment_status": {
+                    "type": "string"
+                },
+                "payment_reference_id": {
+                    "type": "string"
+                },
+                "backend_activation": {
+                    "type": "boolean"
+                },
+                "done_by": {
+                    "type": "string"
+                },
+                "sub_plan_id": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "amount_paid",
+                "payment_status",
+                "payment_reference_id",
+                "backend_activation",
+                "done_by",
+                "sub_plan_id"
+            ]
+        },
+        "source_meta_data": {
+            "type": "object",
+            "properties": {
+                "purchase_type": {
+                    "type": "string"
+                },
+                "source_identifier": {
+                    "type": "string"
+                }
+            },
+            "required": [
+                "purchase_type",
+                "source_identifier"
+            ]
+        },
+        "sub_plan_id": {
+            "type": "string"
+        }
+    },
+    "required": [
+        "_id",
+        "created_at",
+        "updated_at",
+        "version",
+        "mobile_number",
+        "order_id",
+        "status",
+        "start_date",
+        "end_date",
+        "group_plan_id",
+        "payment_reference",
+        "source_meta_data",
+        "sub_plan_id"
+    ],
+    "dynamic_data": {
+        "group_plan_id": {
+            "type": "enum",
+            "meta": {
+                "entity": "group_plan",
+                "params": "_id",
+                "path": "properties.group_plan_id"
+            }
+        }
+    }
+}

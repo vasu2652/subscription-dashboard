@@ -7,7 +7,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import { Button, createStyles, Fab, Grid, Paper, useTheme } from '@material-ui/core';
+import { Button, createStyles, Fab, Grid,  InputAdornment, Paper, TextField, useTheme } from '@material-ui/core';
 import {  mappings } from '../src/constants';
 import { useRouter } from 'next/router';
 import { emphasize, withStyles, Theme } from '@material-ui/core/styles';
@@ -25,6 +25,7 @@ import { fetchDetails, postForm } from '../src/lib/util';
 import { Row,StyledTableCell } from '../src/components/table/styled-row';
 import LinearWithValueLabel from '../src/components/linear-loader';
 import { TopSnackBar } from '../src/components/snackbar';
+import SearchIcon from '@material-ui/icons/Search';
 const StyledBreadcrumb = withStyles((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.grey[100],
@@ -120,8 +121,14 @@ const useStyles = makeStyles((theme) => ({
   },
   table: {
     color:"#02475b"
-  }
+  },
+  textField: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    width: '40ch',
+  },
 }));
+
 export default function EntityTable() {
   const router = useRouter();
   const entity = router.query.entity as string;
@@ -136,6 +143,13 @@ export default function EntityTable() {
   const [formdata, setFormdata] = useState({});
   const [reload , setReload] = useState(new Date());
   const [progress, setProgress] = useState(0);
+  const [searchMeta, setSearchMeta] = useState<{label?: string, searchBy?:string, helperText?: string}>({
+    label:"",
+    searchBy:"",
+    helperText:""
+  });
+  const [searchText, setSearchText]=useState("")
+  const [count, setCount]=useState(10);
   const [snack, setSnack]= useState({
     severity: "success",
     message: "",
@@ -167,14 +181,29 @@ export default function EntityTable() {
     setPage(0);
   };
 
+  const searchByProp = ()=>{
+    setProgress(40);
+      fetchDetails(searchMeta["searchBy"]!, page, rowsPerPage, searchText).then(({response, count}) => {
+        setProgress(50);
+        setData(response);
+        setCount(count);
+        setProgress(90)
+        setProgress(100);
+        setModalOpen(false);
+        setProgress(0);
+      })
+  }
+
   useEffect(() => {
     if (entity !== undefined) {
       setProgress(10);
       setTableSchema(mappings[entity].headers);
+      setSearchMeta(mappings[entity].search);
       setProgress(40);
-      fetchDetails(entity).then((response) => {
+      fetchDetails(entity, page, rowsPerPage).then(({response, count}) => {
         setProgress(50);
         setData(response);
+        setCount(count);
         setProgress(90)
         setSchema(mappings[entity]['schema']);
         setUIschema(mappings[entity]['uischema']);
@@ -183,7 +212,7 @@ export default function EntityTable() {
         setProgress(0);
       })
     }
-  }, [entity, reload])
+  }, [entity, reload, page])
 
   const handleFormSubmit = (data: any) => () => {
     setProgress(10);
@@ -223,10 +252,31 @@ export default function EntityTable() {
       
       <LinearWithValueLabel progress={progress}/>
       <Grid container justify="flex-end">
+      <TextField
+          label={searchMeta?.label}
+          id="margin-normal"
+          className={classes.textField}
+          helperText={searchMeta?.helperText}
+          margin="normal"
+          value={searchText}
+          onChange={(e)=>setSearchText(e.target.value)}
+          InputProps={{
+            endAdornment:
+              <InputAdornment position="end">
+                <IconButton
+                  aria-label="toggle password visibility"
+                  onClick = {searchByProp}
+                >
+                  <SearchIcon/>
+                </IconButton>
+              </InputAdornment>
+            
+          }}
+        />
         <TablePagination
           rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
           colSpan={4}
-          count={data?.length}
+          count={count}
           rowsPerPage={rowsPerPage}
           page={page}
           SelectProps={{
@@ -237,6 +287,7 @@ export default function EntityTable() {
           onChangeRowsPerPage={handleChangeRowsPerPage}
           ActionsComponent={TablePaginationActions}
         />
+        
         <Fab  aria-label="add" style={{ margin: 5, backgroundColor:"#02475b", color:"white" }} onClick={handleModalOpen}>
           <AddIcon />
         </Fab>
@@ -254,11 +305,8 @@ export default function EntityTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {(rowsPerPage > 0
-              ? data?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-              : data
-            )?.map((entity: any, index) => (
-              <Row key={entity?._id} row={entity} sno={index+1} entitySchema={tableSchema} schema={schema} uischema={uischema} handleFormSubmit={handleFormSubmit}/>
+            {data?.map((entity: any, index) => (
+              <Row key={entity?._id} row={entity} sno={(index+1)+(page*rowsPerPage)} entitySchema={tableSchema} schema={schema} uischema={uischema} handleFormSubmit={handleFormSubmit} page={page} rowsPerPage={rowsPerPage}/>
             ))}
           </TableBody>
         </Table>
@@ -266,7 +314,7 @@ export default function EntityTable() {
       <AddNewEntity open={modalOpen} handleClose={handleModalClose} render={() => (
         <>
           <h2 id="transition-modal-title">New: {entity?.toUpperCase()}</h2>
-          <FormComponent uischema={uischema} schema={schema} data={formdata} setFormdata={setFormdata} />
+          <FormComponent uischema={uischema} schema={schema} data={formdata} setFormdata={setFormdata} page={page} rowsPerPage={rowsPerPage} />
           <Button color="primary" variant="contained" onClick={handleFormSubmit(formdata)}>Submit</Button>
         </>)} />
         <TopSnackBar handleClose={handleSnackClose} {...snack}/>

@@ -1,0 +1,113 @@
+{
+    "type": "object",
+    "properties": {
+      "_id": {
+        "type": "string"
+      },
+      "created_at": {
+        "type": "string",
+        "format": "date-time"
+    },
+    "updated_at": {
+        "type": "string",
+        "format": "date-time"
+    },
+    "deleted_at": {
+        "type": "string",
+        "format": "date-time"
+    },
+    "version": {
+        "type": "integer"
+    },
+      "mobile_number": {
+        "type": "string"
+      },
+      "amount": {
+        "type": "integer"
+      },
+      "source_transaction_indentifier": {
+        "type": "string"
+      },
+      "transaction_type": {
+        "type": "string"
+      },
+      "order_id": {
+        "type": "string"
+      },
+      "coupon_availed": {
+        "type": "string"
+      },
+      "user_subscription_id": {
+        "type": "string"
+      },
+      "subscription_inclusion_id": {
+        "type": "string"
+      },
+      "transaction_date": {
+        "type": "string",
+        "format": "date-time"
+    },
+      "meta": {
+        "type": "string"
+      },
+      "payment_reference": {
+        "type": "object",
+        "properties": {
+          "actual_amount": {
+            "type": "integer"
+          },
+          "amount_paid": {
+            "type": "integer"
+          },
+          "payment_status": {
+            "type": "string"
+          },
+          "payment_reference_id": {
+            "type": "string"
+          },
+          "purchase_via_HC": {
+            "type": "boolean"
+          },
+          "HC_used": {
+            "type": "integer"
+          },
+          "order_id": {
+            "type": "string"
+          },
+          "delivery_charges": {
+            "type": "integer"
+          },
+          "cashbackEarned": {
+            "type": "number"
+          },
+          "couponDiscount": {
+            "type": "integer"
+          },
+          "deliveryChargesSaved": {
+            "type": "integer"
+          },
+          "activeSubscriptions": {
+            "type": "array",
+            "items": [
+              {
+                "type": "string"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "required": [
+      "_id",
+      "created_at",
+      "updated_at",
+      "version",
+      "mobile_number",
+      "amount",
+      "source_transaction_indentifier",
+      "transaction_type",
+      "order_id",
+      "transaction_date",
+      "payment_reference"
+    ]
+  }

@@ -1,0 +1,89 @@
+{
+    "type": "Categorization",
+    "elements": [
+        {
+            "type": "Category",
+            "label": "Basic Info",
+            "elements": [
+                {
+                    "type": "VerticalLayout",
+                    "elements": [
+                        {
+                            "type": "HorizontalLayout",
+                            "elements": [
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/mobile_number"
+                                },
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/order_id"
+                                },
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/status"
+                                },
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/start_date"
+                                },
+                                {
+                                    "type": "Control",
+                                    "scope": "#/properties/end_date"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "type": "Category",
+            "label": "Configuration",
+            "elements": [
+                {
+                    "type": "Control",
+                    "scope": "#/properties/transaction_date_time"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/deactivation_date"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/created_at"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/updated_at"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/deleted_at"
+                }
+            ]
+        },
+        {
+            "type": "Category",
+            "label": "Meta",
+            "elements": [
+                {
+                    "type": "Control",
+                    "scope": "#/properties/group_plan_id"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/sub_plan_id"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/payment_reference"
+                },
+                {
+                    "type": "Control",
+                    "scope": "#/properties/source_meta_data"
+                }
+            ]
+        }
+    ]
+}
