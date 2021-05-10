@@ -10,9 +10,6 @@ function Title(props: { children: React.ReactNode; }) {
   );
 }
 
-function preventDefault(event: { preventDefault: () => void; }) {
-  event.preventDefault();
-}
 
 const useStyles = makeStyles({
   depositContext: {
