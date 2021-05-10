@@ -15,9 +15,8 @@ import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
-import MailIcon from '@material-ui/icons/Mail';
-import { Button, Link, Menu, MenuItem } from '@material-ui/core';
+import { blueGrey } from '@material-ui/core/colors';
+import { Avatar, Button, Link, Menu, MenuItem } from '@material-ui/core';
 import { signOut, useSession } from 'next-auth/client'
 import { AccountCircle } from '@material-ui/icons';
 
@@ -85,7 +84,11 @@ const useStyles = makeStyles((theme: Theme) =>
       padding: theme.spacing(0, 1),
       // necessary for content to be below app bar
       ...theme.mixins.toolbar,
-    }
+    },
+    square: {
+      color: theme.palette.getContrastText(blueGrey[500]),
+      backgroundColor: blueGrey[500],
+    },
   }),
 );
 
@@ -95,6 +98,7 @@ export default function MiniDrawer() {
   const [open, setOpen] = React.useState(false);
   const [session] = useSession();
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
+  const navigation = [{text: "group",icon: "GR"},{  text: "group_plan",  icon: "GP"},{  text: "banners",  icon: "GB"},{  text: "benefits",  icon: "SI"},{  text: "subscriptions",  icon: "US"},{  text: "transactions",  icon: "UST"}]
   const anchorOpen = Boolean(anchorEl);
   const handleClose = () => {
     setAnchorEl(null);
@@ -192,10 +196,13 @@ export default function MiniDrawer() {
         </div>
         <Divider />
         <List>
-          {['group', 'group_plan', 'benefits', 'banners', 'subscriptions', 'transactions'].map((text, index) => (
+          
+          {navigation.map(({text,icon}, index) => (
             <Link href={`/data?entity=${text}`} color="inherit" key={index}>
               <ListItem button key={text.toUpperCase()} href={`/data?entity=${text}`}>
-                <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
+                <ListItemIcon>
+                <Avatar className={classes.square}>{icon}</Avatar>
+                </ListItemIcon>
                 <ListItemText primary={text} />
               </ListItem>
             </Link>

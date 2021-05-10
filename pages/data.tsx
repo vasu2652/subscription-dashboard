@@ -7,8 +7,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TablePagination from '@material-ui/core/TablePagination';
 import TableRow from '@material-ui/core/TableRow';
-import { Button, createStyles, Fab, Grid,  InputAdornment, Paper, TextField, useTheme } from '@material-ui/core';
-import {  mappings } from '../src/constants';
+import { Button, createStyles, Fab, Grid, InputAdornment, Paper, TextField, useTheme } from '@material-ui/core';
+import { QueryMetaMapper } from '../src/constants';
 import { useRouter } from 'next/router';
 import { emphasize, withStyles, Theme } from '@material-ui/core/styles';
 import Breadcrumbs from '@material-ui/core/Breadcrumbs';
@@ -22,7 +22,7 @@ import LastPageIcon from '@material-ui/icons/LastPage';
 import AddIcon from '@material-ui/icons/Add';
 import AddNewEntity from '../src/components/modal';
 import { fetchDetails, postForm } from '../src/lib/util';
-import { Row,StyledTableCell } from '../src/components/table/styled-row';
+import { Row, StyledTableCell } from '../src/components/table/styled-row';
 import LinearWithValueLabel from '../src/components/linear-loader';
 import { TopSnackBar } from '../src/components/snackbar';
 import SearchIcon from '@material-ui/icons/Search';
@@ -30,7 +30,7 @@ const StyledBreadcrumb = withStyles((theme: Theme) => ({
   root: {
     backgroundColor: theme.palette.grey[100],
     height: theme.spacing(3),
-    color:"#02475b",
+    color: "#02475b",
     fontSize: 20,
     fontWeight: theme.typography.fontWeightRegular,
     '&:hover, &:focus': {
@@ -120,7 +120,7 @@ const useStyles = makeStyles((theme) => ({
     //height:500
   },
   table: {
-    color:"#02475b"
+    color: "#02475b"
   },
   textField: {
     marginLeft: theme.spacing(1),
@@ -141,16 +141,16 @@ export default function EntityTable() {
   const [schema, setSchema] = useState({});
   const [modalOpen, setModalOpen] = React.useState(false);
   const [formdata, setFormdata] = useState({});
-  const [reload , setReload] = useState(new Date());
+  const [reload, setReload] = useState(new Date());
   const [progress, setProgress] = useState(0);
-  const [searchMeta, setSearchMeta] = useState<{label?: string, searchBy?:string, helperText?: string}>({
-    label:"",
-    searchBy:"",
-    helperText:""
+  const [searchMeta, setSearchMeta] = useState<{ label?: string, searchBy?: string, helperText?: string }>({
+    label: "",
+    searchBy: "",
+    helperText: ""
   });
-  const [searchText, setSearchText]=useState("")
-  const [count, setCount]=useState(10);
-  const [snack, setSnack]= useState({
+  const [searchText, setSearchText] = useState("")
+  const [count, setCount] = useState(10);
+  const [snack, setSnack] = useState({
     severity: "success",
     message: "",
     open: false
@@ -181,32 +181,32 @@ export default function EntityTable() {
     setPage(0);
   };
 
-  const searchByProp = ()=>{
+  const searchByProp = () => {
     setProgress(40);
-      fetchDetails(searchMeta["searchBy"]!, page, rowsPerPage, searchText).then(({response, count}) => {
-        setProgress(50);
-        setData(response);
-        setCount(count);
-        setProgress(90)
-        setProgress(100);
-        setModalOpen(false);
-        setProgress(0);
-      })
+    fetchDetails(searchMeta["searchBy"]!, page, rowsPerPage, searchText).then(({ response, count }) => {
+      setProgress(50);
+      setData(response);
+      setCount(count);
+      setProgress(90)
+      setProgress(100);
+      setModalOpen(false);
+      setProgress(0);
+    })
   }
 
   useEffect(() => {
     if (entity !== undefined) {
       setProgress(10);
-      setTableSchema(mappings[entity].headers);
-      setSearchMeta(mappings[entity].search);
+      setTableSchema(QueryMetaMapper[entity].headers);
+      setSearchMeta(QueryMetaMapper[entity].search);
       setProgress(40);
-      fetchDetails(entity, page, rowsPerPage).then(({response, count}) => {
+      fetchDetails(entity, page, rowsPerPage).then(({ response, count }) => {
         setProgress(50);
         setData(response);
         setCount(count);
         setProgress(90)
-        setSchema(mappings[entity]['schema']);
-        setUIschema(mappings[entity]['uischema']);
+        setSchema(QueryMetaMapper[entity]['schema']);
+        setUIschema(QueryMetaMapper[entity]['uischema']);
         setProgress(100);
         setModalOpen(false);
         setProgress(0);
@@ -247,30 +247,30 @@ export default function EntityTable() {
           icon={<HomeIcon fontSize="small" />}
           onClick={handleClick}
         />
-        <StyledBreadcrumb component="a" href="#" label={entity} onClick={handleClick}  />
+        <StyledBreadcrumb component="a" href="#" label={entity} onClick={handleClick} />
       </Breadcrumbs>
-      
-      <LinearWithValueLabel progress={progress}/>
+
+      <LinearWithValueLabel progress={progress} />
       <Grid container justify="flex-end">
-      <TextField
+        <TextField
           label={searchMeta?.label}
           id="margin-normal"
           className={classes.textField}
           helperText={searchMeta?.helperText}
           margin="normal"
           value={searchText}
-          onChange={(e)=>setSearchText(e.target.value)}
+          onChange={(e) => setSearchText(e.target.value)}
           InputProps={{
             endAdornment:
               <InputAdornment position="end">
                 <IconButton
                   aria-label="toggle password visibility"
-                  onClick = {searchByProp}
+                  onClick={searchByProp}
                 >
-                  <SearchIcon/>
+                  <SearchIcon />
                 </IconButton>
               </InputAdornment>
-            
+
           }}
         />
         <TablePagination
@@ -287,8 +287,8 @@ export default function EntityTable() {
           onChangeRowsPerPage={handleChangeRowsPerPage}
           ActionsComponent={TablePaginationActions}
         />
-        
-        <Fab  aria-label="add" style={{ margin: 5, backgroundColor:"#02475b", color:"white" }} onClick={handleModalOpen}>
+
+        <Fab aria-label="add" style={{ margin: 5, backgroundColor: "#02475b", color: "white" }} onClick={handleModalOpen}>
           <AddIcon />
         </Fab>
       </Grid>
@@ -297,7 +297,7 @@ export default function EntityTable() {
         <Table aria-label="collapsible table" className={classes.table}>
           <TableHead>
             <TableRow>
-            <StyledTableCell align="center" key={0}>SNO</StyledTableCell>
+              <StyledTableCell align="center" key={0}>SNO</StyledTableCell>
               {
                 tableSchema.map((key, index) => <StyledTableCell align="center" key={index}>{key.toUpperCase()}</StyledTableCell>)
               }
@@ -306,7 +306,7 @@ export default function EntityTable() {
           </TableHead>
           <TableBody>
             {data?.map((entity: any, index) => (
-              <Row key={entity?._id} row={entity} sno={(index+1)+(page*rowsPerPage)} entitySchema={tableSchema} schema={schema} uischema={uischema} handleFormSubmit={handleFormSubmit} page={page} rowsPerPage={rowsPerPage}/>
+              <Row key={entity?._id} row={entity} sno={(index + 1) + (page * rowsPerPage)} entitySchema={tableSchema} schema={schema} uischema={uischema} handleFormSubmit={handleFormSubmit} page={page} rowsPerPage={rowsPerPage} />
             ))}
           </TableBody>
         </Table>
@@ -317,7 +317,7 @@ export default function EntityTable() {
           <FormComponent uischema={uischema} schema={schema} data={formdata} setFormdata={setFormdata} page={page} rowsPerPage={rowsPerPage} />
           <Button color="primary" variant="contained" onClick={handleFormSubmit(formdata)}>Submit</Button>
         </>)} />
-        <TopSnackBar handleClose={handleSnackClose} {...snack}/>
+      <TopSnackBar handleClose={handleSnackClose} {...snack} />
     </>
   );
 }

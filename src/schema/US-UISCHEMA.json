@@ -26,6 +26,7 @@
                                 {
                                     "type": "Control",
                                     "scope": "#/properties/start_date"
+                                    
                                 },
                                 {
                                     "type": "Control",
@@ -48,18 +49,6 @@
                 {
                     "type": "Control",
                     "scope": "#/properties/deactivation_date"
-                },
-                {
-                    "type": "Control",
-                    "scope": "#/properties/created_at"
-                },
-                {
-                    "type": "Control",
-                    "scope": "#/properties/updated_at"
-                },
-                {
-                    "type": "Control",
-                    "scope": "#/properties/deleted_at"
                 }
             ]
         },
@@ -73,7 +62,14 @@
                 },
                 {
                     "type": "Control",
-                    "scope": "#/properties/sub_plan_id"
+                    "scope": "#/properties/sub_plan_id",
+                    "rule": {
+                        "effect": "SHOW",
+                        "condition": {
+                          "scope": "#/properties/group_plan_id",
+                          "schema": { "enum": ["f224b0f3-2814-420c-8023-dc68ba3042f3(CIRCLEPlan)"] }
+                        }
+                      }
                 },
                 {
                     "type": "Control",

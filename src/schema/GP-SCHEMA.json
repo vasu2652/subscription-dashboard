@@ -109,7 +109,7 @@
             "type": "enum",
             "meta": {
                 "entity": "group",
-                "params": "_id",
+                "params": "readable_id",
                 "path": "properties.group_id"
             }
         }

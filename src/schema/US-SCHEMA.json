@@ -29,7 +29,17 @@
             "type": "string"
         },
         "status": {
-            "type": "string"
+            "type": "string",
+            "enum":[
+                "ACTIVE",
+                "DEFERRED_INACTIVE",
+                "PAYMENT_FAILED",
+                "PAYMENT_PENDING",
+                "DISABLED",
+                "CANCELLED",
+                "UPGRADED",
+                "DEFERRED_ACTIVE"
+            ]
         },
         "start_date": {
             "type": "string",
@@ -60,7 +70,13 @@
                     "type": "integer"
                 },
                 "payment_status": {
-                    "type": "string"
+                    "type": "string",
+                    "enum":[
+                        "TXN_SUCCESS",
+                        "TXN_FAILURE",
+                        "PENDING",
+                        "INVALID_PAYMENT"
+                    ]
                 },
                 "payment_reference_id": {
                     "type": "string"
@@ -70,25 +86,22 @@
                 },
                 "done_by": {
                     "type": "string"
-                },
-                "sub_plan_id": {
-                    "type": "string"
                 }
             },
             "required": [
-                "amount_paid",
-                "payment_status",
-                "payment_reference_id",
                 "backend_activation",
-                "done_by",
-                "sub_plan_id"
+                "done_by"
             ]
         },
         "source_meta_data": {
             "type": "object",
             "properties": {
                 "purchase_type": {
-                    "type": "string"
+                    "type": "string",
+                    "enum":[
+                        "first_time",
+                        "renew"
+                    ]
                 },
                 "source_identifier": {
                     "type": "string"
@@ -100,30 +113,36 @@
             ]
         },
         "sub_plan_id": {
-            "type": "string"
+            "type": "string",
+            "enum":[
+                "Circle_HalfYearly",
+                "Circle_Monthly",
+                "Circle_Anually",
+                "Circle_Quaterly",
+                "CirclePrepaidYearlyMS",
+                "Circle12MonthsAirtelPaidSilver",
+                "Circle6MonthsAirtelPaidSilver",
+                "Circle3MonthsAirtelPaidSilver",
+                "Circle2MonthsAirtelPaidSilver",
+                "Circle12MonthsAirtelFreePlatinum",
+                "Circle3MonthsAirtelFreeGold"
+            ]
         }
     },
     "required": [
-        "_id",
-        "created_at",
-        "updated_at",
-        "version",
         "mobile_number",
         "order_id",
         "status",
-        "start_date",
-        "end_date",
         "group_plan_id",
         "payment_reference",
-        "source_meta_data",
-        "sub_plan_id"
+        "source_meta_data"
     ],
     "dynamic_data": {
         "group_plan_id": {
             "type": "enum",
             "meta": {
                 "entity": "group_plan",
-                "params": "_id",
+                "params": "readable_id",
                 "path": "properties.group_plan_id"
             }
         }

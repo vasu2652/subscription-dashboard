@@ -9,6 +9,7 @@ import TableCell from '@material-ui/core/TableCell';
 import { createStyles, IconButton, makeStyles, TableRow, CssBaseline, Button } from '@material-ui/core';
 import { FormComponent } from '../form';
 import { withStyles } from '@material-ui/core/styles';
+
 export const StyledTableCell = withStyles(() =>
   createStyles({
     head: {
@@ -27,27 +28,29 @@ const useRowStyles = makeStyles({
         //borderBottom: 'unset',
       },
     },
-  });
-  const theme = {
-    scheme: 'google',
-    author: 'seth wright (http://sethawright.com)',
-    base00: '#1d1f21',
-    base01: '#282a2e',
-    base02: '#373b41',
-    base03: '#969896',
-    base04: '#b4b7b4',
-    base05: '#c5c8c6',
-    base06: '#e0e0e0',
-    base07: '#ffffff',
-    base08: '#CC342B',
-    base09: '#F96A38',
-    base0A: '#FBA922',
-    base0B: '#198844',
-    base0C: '#3971ED',
-    base0D: '#3971ED',
-    base0E: '#A36AC7',
-    base0F: '#3971ED'
-  };
+});
+
+const theme = {
+  scheme: 'google',
+  author: 'seth wright (http://sethawright.com)',
+  base00: '#1d1f21',
+  base01: '#282a2e',
+  base02: '#373b41',
+  base03: '#969896',
+  base04: '#b4b7b4',
+  base05: '#c5c8c6',
+  base06: '#e0e0e0',
+  base07: '#ffffff',
+  base08: '#CC342B',
+  base09: '#F96A38',
+  base0A: '#FBA922',
+  base0B: '#198844',
+  base0C: '#3971ED',
+  base0D: '#3971ED',
+  base0E: '#A36AC7',
+  base0F: '#3971ED'
+};
+
 export const Row = (props: { row: any, entitySchema: string[], schema: Object, uischema: Object, handleFormSubmit:any, sno:number, page:number, rowsPerPage:number })=> {
   const { row, entitySchema, schema, uischema,handleFormSubmit, sno, page, rowsPerPage } = props;
   const [ formdata, setFormdata] = useState(row);
@@ -66,7 +69,6 @@ export const Row = (props: { row: any, entitySchema: string[], schema: Object, u
               valueLabel: {
                 textDecoration: 'underline',
               },
-
               // switch key for objects to uppercase when object is expanded.
               // `nestedNodeLabel` receives additional argument `expandable`
               nestedNodeLabel: ({ style }, expanded) => ({
@@ -93,7 +95,7 @@ export const Row = (props: { row: any, entitySchema: string[], schema: Object, u
             <Box margin={0.5} display="flex" style={{ flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
               <FormComponent data={formdata} schema={schema} uischema={uischema} open={open} setFormdata={setFormdata} page={page} rowsPerPage={rowsPerPage}/>
               <CssBaseline />
-              <Button variant="contained" color="secondary" onClick={handleFormSubmit("EDIT",formdata)}>submit</Button>
+              <Button variant="contained" color="secondary" onClick={handleFormSubmit(formdata)}>submit</Button>
             </Box>
           </Collapse>
         </StyledTableCell>

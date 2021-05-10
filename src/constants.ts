@@ -11,7 +11,8 @@ const subscription_schema = require('./schema/US-SCHEMA.json');
 const subscription_uischema = require('./schema/US-UISCHEMA.json');
 const transaction_schema = require('./schema/UST-SCHEMA.json');
 const transaction_uischema = require('./schema/UST-UISCHEMA.json');
-export const queries: { [key: string]: string } = {
+
+export const QueryDefinations: { [key: string]: string } = {
   group: `query GetAllGroup($skip:Int, $take:Int) {
         GetAllGroup(skip:$skip, take: $take) {
           code
@@ -23,6 +24,7 @@ export const queries: { [key: string]: string } = {
             start_date
             end_date
             is_active
+            readable_id
           }
         }
       }`,
@@ -44,6 +46,7 @@ export const queries: { [key: string]: string } = {
             end_date
             coupons
             group_id
+            readable_id
             group{
               _id
               name
@@ -91,6 +94,7 @@ export const queries: { [key: string]: string } = {
             refresh_frequency
             icon
             group_plan_id
+            priority
           }
         }
       }`,
@@ -108,14 +112,13 @@ export const queries: { [key: string]: string } = {
         end_date
         expires_in
         payment_reference
-        created_at
-        updated_at
         deactivation_date
         transaction_date_time
         order_id
-        version
         group_plan_id
         plan_id
+        source_meta_data
+        sub_plan_id
         
       }
     }
@@ -223,9 +226,17 @@ export const queries: { [key: string]: string } = {
         version
       }
     }
+  }`,
+  get_subscription_count_by_status:`query GetSubscriptionCountByStatus{
+    GetSubscriptionCountByStatus{
+      code
+      success
+      response
+    }
   }`
 };
-export const mappings: { [key: string]: any } = {
+
+export const QueryMetaMapper: { [key: string]: any } = {
   group: {
     response: "GetAllGroup",
     headers: ["name", "start_date", "end_date", "is_active"],
@@ -298,7 +309,7 @@ export const mappings: { [key: string]: any } = {
       "status",
       "start_date",
       "expires_in",
-      "payment_reference"
+      "sub_plan_id"
     ],
     uischema:subscription_uischema,
     schema:subscription_schema,
@@ -332,5 +343,10 @@ export const mappings: { [key: string]: any } = {
   },
   search_transactions_by_mobile:{
     response: "GetAllUserSubscriptionTransactionsByMobile"
+  },
+  get_subscription_count_by_status:{
+    response: `GetSubscriptionCountByStatus`
   }
 };
+
+export const queries = Object.keys(QueryDefinations);

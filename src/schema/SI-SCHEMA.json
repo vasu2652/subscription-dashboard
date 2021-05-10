@@ -72,10 +72,10 @@
         "attribute_category": {
             "type": ["string"],
             "enum":[
-                "Pharma",
-                "Consults",
-                "Diagnostics",
-                "Generic"
+                "PHARMA",
+                "CONSULT",
+                "DIAGNOSTIC",
+                "GENERIC"
             ]
         },
         "priority": {
@@ -98,7 +98,7 @@
             "type": "enum",
             "meta": {
                 "entity": "group_plan",
-                "params": "_id",
+                "params": "readable_id",
                 "path": "properties.group_plan_id"
             }
         }

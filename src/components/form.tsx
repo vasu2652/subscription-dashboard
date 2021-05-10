@@ -8,13 +8,13 @@ import {
 import { Container } from '@material-ui/core';
 export const FormComponent = (props: { uischema: any; schema: any; data: any; open?:boolean, setFormdata:Function, page:number, rowsPerPage:number
 }) =>{
-  const { uischema, schema, data, open =false, setFormdata, page, rowsPerPage} = props;
+  const { uischema, schema, data, open =false, setFormdata} = props;
   const [stuffedSchema, setStuffedSchema] = useState(schema);
   useEffect(()=>{
     if(schema['dynamic_data']){
-      setStuffedSchema(getStuffedSchema(schema, page, rowsPerPage));
+      setStuffedSchema(getStuffedSchema(schema));
     }
-  },[schema])
+  },[schema]) 
     return (
         <Container style={open?{backgroundColor:"#f5f5f5"}:{}}>
         <JsonForms

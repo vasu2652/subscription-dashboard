@@ -61,7 +61,7 @@
         "additional_info_meta":{
           "type": "array",
           "items": {
-            "$ref": "#/definitions/content"
+            "$ref": "#/definitions/additional_info_meta"
           }
         },
         "visibilityFilters": {
@@ -106,7 +106,13 @@
       "type": "integer"
     },
     "banner_visibility_mode": {
-      "type": "string"
+      "type": "string",
+      "enum":[
+        "LOGGED_IN",
+        "SUBSCRIBED",
+        "UNSUBSCRIBED",
+        "LOGGED_OUT"
+      ]
     },
     "start_date": {
       "type": "string",
@@ -125,6 +131,29 @@
           "type": "string"
         },
         "displayValue": {
+          "type": "string"
+        }
+      }
+    },
+    "additional_info_meta": {
+      "type": "object",
+      "required": [
+        "additional_info_meta_key",
+        "replaceValue"
+      ],
+      "properties": {
+        "additional_info_meta_key": {
+          "type": "string",
+          "enum": [
+            "GetUserHealthCredits",
+            "GetUserSavings",
+            "GetPharmaSavings",
+            "GetDiagnosticSavings",
+            "GetDeliverySavings",
+            "GetConsultSavings"
+          ]
+        },
+        "replaceValue": {
           "type": "string"
         }
       }
@@ -161,7 +190,7 @@
         "type": "enum",
         "meta": {
             "entity": "group",
-            "params": "_id",
+            "params": "readable_id",
             "path": "properties.group_id"
         }
     }

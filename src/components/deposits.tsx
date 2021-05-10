@@ -10,7 +10,6 @@ function Title(props: { children: React.ReactNode; }) {
   );
 }
 
-
 function preventDefault(event: { preventDefault: () => void; }) {
   event.preventDefault();
 }
@@ -34,7 +33,7 @@ export default function Deposits(props: { title: any; subs: any; }) {
         Till Today
       </Typography>
       <div>
-        <Link color="primary" href="#" onClick={preventDefault}>
+        <Link color="primary" href={"/data?entity=subscriptions"}>
           View More
         </Link>
       </div>

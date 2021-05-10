@@ -1,14 +1,19 @@
-import { mappings, queries } from "../constants";
+import { QueryMetaMapper, QueryDefinations } from "../constants";
 import * as _ from 'lodash';
-export const fetchDetails = async (entity:string, pageNumber:number, rowsPerPage:number,pattern?:string) => {
+
+export const fetchDetails = async (query:string, pageNumber?:number, rowsPerPage?:number,pattern?:string) => {
     try {
-      const getVariables = () => {
-        const skip = rowsPerPage * pageNumber;
-        const take = rowsPerPage;
+      const getVariables = (query?:string) => {
+        if(query==="get_subscription_count_by_status" || (pageNumber && rowsPerPage)!){
+          return {};
+        }
+
+        const skip = rowsPerPage! * pageNumber!;
+        const take = rowsPerPage!;
         return pattern?{ skip, take, pattern }: { skip, take }
       }
       
-    const apiResponse = await fetch(`https://aph-staging-api.apollo247.com/graphql`, {
+    const apiResponse = await fetch(`http://localhost:3000/graphql`, {
         method: "POST",
         headers: {
           "AUTHORIZATION": 'Bearer 3d1833da7020e0602165529446587434',
@@ -16,14 +21,14 @@ export const fetchDetails = async (entity:string, pageNumber:number, rowsPerPage
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
-          query : queries[entity],
+          query : QueryDefinations[query],
           variables:{
             ...getVariables()
           }
         })
       });
       const { data } = await apiResponse.json();
-      const { response, count } = data[mappings[entity]['response']];
+      const { response, count=0 } = data[QueryMetaMapper[query]['response']];
       return Promise.resolve({
         response,
         count
@@ -33,32 +38,42 @@ export const fetchDetails = async (entity:string, pageNumber:number, rowsPerPage
         return Promise.reject(error);
     }
 }
+
 export const postForm = (entity:string, data:any)=>{
   try {
+    const query = `mutation DashboardGenericUpsertEntity($entity:String!, $data:JSON!){
+      DashboardGenericUpsertEntity(entity:$entity, data:$data)
+    }`;
     return new Promise(async (resolve,reject)=>{
-      fetch(`https://aph-staging-api.apollo247.com/api/dashboard/${entity}`, {
+      fetch(`http://localhost:3000/graphql`, {
         method: "POST",
         headers: {
           "AUTHORIZATION": 'Bearer 3d1833da7020e0602165529446587434',
           "mobilenumber": "+919010637524",
           "Content-Type": "application/json"
         },
-        body: JSON.stringify(data)
+        body: JSON.stringify({
+          query,
+          variables:{
+            entity,
+            data
+          }
+        })
       }).then(res=>res.json()).then(resolve).catch(reject);
     })
-
   } catch (error) {
-      console.error(error);
+      console.error(error.toString());
       return Promise.reject(error);
   }
 }
-export const getStuffedSchema = (schema:any, page:number, rowsPerPage:number)=>{
+
+export const getStuffedSchema = (schema:any)=>{
     const { dynamic_data } = schema;
     Object.keys(dynamic_data).forEach(async (key:string)=>{
       switch(dynamic_data[key].type){
         case "enum":{
           const { meta:{ entity, params, path }} = dynamic_data[key];
-          const {response} = await fetchDetails(entity, page, rowsPerPage);
+          const {response} = await fetchDetails(entity);
           const values = response.map((val: { [x: string]: any; })=>{
             return val[params];
           });
@@ -67,4 +82,5 @@ export const getStuffedSchema = (schema:any, page:number, rowsPerPage:number)=>{
       }
     })
     return schema;
-  }
+}
+
