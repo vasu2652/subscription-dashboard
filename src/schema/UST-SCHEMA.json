@@ -1,29 +1,15 @@
 {
     "type": "object",
     "properties": {
-      "_id": {
-        "type": "string"
-      },
-      "created_at": {
-        "type": "string",
-        "format": "date-time"
-    },
-    "updated_at": {
-        "type": "string",
-        "format": "date-time"
-    },
     "deleted_at": {
         "type": "string",
         "format": "date-time"
-    },
-    "version": {
-        "type": "integer"
     },
       "mobile_number": {
         "type": "string"
       },
       "amount": {
-        "type": "integer"
+        "type": "number"
       },
       "source_transaction_indentifier": {
         "type": "string"
@@ -54,10 +40,10 @@
         "type": "object",
         "properties": {
           "actual_amount": {
-            "type": "integer"
+            "type": "number"
           },
           "amount_paid": {
-            "type": "integer"
+            "type": "number"
           },
           "payment_status": {
             "type": "string"
@@ -69,39 +55,33 @@
             "type": "boolean"
           },
           "HC_used": {
-            "type": "integer"
+            "type": "number"
           },
           "order_id": {
             "type": "string"
           },
           "delivery_charges": {
-            "type": "integer"
+            "type": "number"
           },
           "cashbackEarned": {
             "type": "number"
           },
           "couponDiscount": {
-            "type": "integer"
+            "type": "number"
           },
           "deliveryChargesSaved": {
-            "type": "integer"
+            "type": "number"
           },
           "activeSubscriptions": {
             "type": "array",
-            "items": [
-              {
+            "items": {
                 "type": "string"
-              }
-            ]
+            }
           }
         }
       }
     },
     "required": [
-      "_id",
-      "created_at",
-      "updated_at",
-      "version",
       "mobile_number",
       "amount",
       "source_transaction_indentifier",

@@ -43,33 +43,7 @@
             "elements": [
                 {
                     "type": "Control",
-                    "scope": "#/properties/_id"
-                },
-                {
-                    "type": "Control",
-                    "scope": "#/properties/created_at"
-                },
-                {
-                    "type": "Control",
-                    "scope": "#/properties/updated_at"
-                },
-                {
-                    "type": "Control",
                     "scope": "#/properties/deleted_at"
-                },
-                {
-                    "type": "Control",
-                    "scope": "#/properties/version"
-                }
-            ]
-        },
-        {
-            "type": "Category",
-            "label": "Meta",
-            "elements": [
-                {
-                    "type": "Control",
-                    "scope": "#/properties/coupon_availed"
                 },
                 {
                     "type": "Control",
@@ -82,6 +56,16 @@
                 {
                     "type": "Control",
                     "scope": "#/properties/transaction_date"
+                }
+            ]
+        },
+        {
+            "type": "Category",
+            "label": "Meta",
+            "elements": [
+                {
+                    "type": "Control",
+                    "scope": "#/properties/coupon_availed"
                 },
                 {
                     "type": "Control",

@@ -221,6 +221,12 @@ export const QueryDefinations: { [key: string]: string } = {
         transaction_type
         transaction_date
         payment_reference
+        user_subscription{
+          _id
+        }
+        subscription_inclusion{
+          _id
+        }
         created_at
         updated_at
         version

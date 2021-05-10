@@ -12,12 +12,10 @@ export const fetchDetails = async (query:string, pageNumber?:number, rowsPerPage
         const take = rowsPerPage!;
         return pattern?{ skip, take, pattern }: { skip, take }
       }
-      
-    const apiResponse = await fetch(`https://aph-staging-api.apollo247.com/graphql`, {
+    const apiResponse = await fetch(`${process.env.NEXT_PUBLIC_APOLLO247_BASEURL!}/graphql`, {
         method: "POST",
         headers: {
-          "AUTHORIZATION": 'Bearer 3d1833da7020e0602165529446587434',
-          "mobilenumber": "+918919666249",
+          "AUTHORIZATION": process.env.NEXT_PUBLIC_APOLLO247_TOKEN!,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
@@ -45,11 +43,10 @@ export const postForm = (entity:string, data:any)=>{
       DashboardGenericUpsertEntity(entity:$entity, data:$data)
     }`;
     return new Promise(async (resolve,reject)=>{
-      fetch(`https://aph-staging-api.apollo247.com/graphql`, {
+      fetch(`${process.env.NEXT_PUBLIC_APOLLO247_BASEURL!}/graphql`, {
         method: "POST",
         headers: {
-          "AUTHORIZATION": 'Bearer 3d1833da7020e0602165529446587434',
-          "mobilenumber": "+919010637524",
+          "AUTHORIZATION": process.env.NEXT_PUBLIC_APOLLO247_TOKEN!,
           "Content-Type": "application/json"
         },
         body: JSON.stringify({
