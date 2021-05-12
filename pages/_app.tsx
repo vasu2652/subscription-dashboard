@@ -45,7 +45,7 @@ export const AuthHOC = (props: AppProps)=>{
   const { Component, pageProps } = props;
   const [session] = useSession();
   if(session){
-    return <Component {...pageProps}/>
+    return <Component {...pageProps} user={session.user}/>
   }
   else{
     return <Unauthorized/>

@@ -129,7 +129,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function EntityTable() {
+export default function EntityTable(props:any) {
+  const { user } = props;
   const router = useRouter();
   const entity = router.query.entity as string;
   const classes = useStyles();
@@ -216,7 +217,10 @@ export default function EntityTable() {
 
   const handleFormSubmit = (data: any) => () => {
     setProgress(10);
-    postForm(entity, data).then((data: any) => {
+    postForm(entity, {
+      ...data,
+      user
+    }).then((data: any) => {
       if (data.error) {
         setSnack({
           severity: "error",
@@ -237,6 +241,7 @@ export default function EntityTable() {
 
     })
   }
+
   return (
     <>
       <Breadcrumbs aria-label="breadcrumb">
